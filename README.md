@@ -1,3 +1,17 @@
 # bookmarklets
 
-[Amazon - Sort by number of reviews](javascript:void%28%28function%28%29%7B%20var%20url%20%3D%20new%20URL%28location.href%29%3B%20var%20search_params%20%3D%20new%20URLSearchParams%28url.search%29%3B%20%20search_params.set%28%27s%27%2C%20%27review-count-rank%27%29%3B%20url.search%20%3D%20search_params.toString%28%29%3B%20location.href%20%3D%20url.toString%28%29%3B%20%7D%29%28%29%29%3B)
+If you don't know what bookmarklets are, I recommend this easy read: https://www.howtogeek.com/189358/beginner-geek-how-to-use-bookmarklets-on-any-device/
+
+And if you are not sure how to install a bookmarklet, you can find detailed instructions here: https://mreidsma.github.io/bookmarklets/installing.html
+
+## Amazon - Sort by number of reviews
+
+The bookmarklet below changes the sort of your current Amazon.com search to order the results by descending number of user reviews. I find that using this sort in combination with the "Avg. Customer Review" filter greatly improves my searches.
+
+> Note: for some reason this sort does not work until you limit your search to a "department" of the Amazon.com online store. 
+
+```javascript
+javascript:void((function(){ var url = new URL(location.href); var search_params = new URLSearchParams(url.search);  search_params.set('s', 'review-count-rank'); url.search = search_params.toString(); location.href = url.toString(); })());
+```
+
+Here is a link demonstrating the result for USB cables: https://www.amazon.com/s?k=usb+cable&i=electronics&s=review-count-rank
