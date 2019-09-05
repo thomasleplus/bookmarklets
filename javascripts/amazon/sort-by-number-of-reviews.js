@@ -3,6 +3,9 @@ var search_params = new URLSearchParams(url.search);
 if (!search_params.get('rh')) {
   window.alert('Please narrow down your search to a specific department for the sort to take effect.');
 }
+if (search_params.get('s') === 'review-count-rank') {
+  return;
+}
 search_params.set('s', 'review-count-rank');
 url.search = search_params.toString();
 location.href = url.toString();
