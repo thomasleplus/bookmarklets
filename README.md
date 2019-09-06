@@ -1,3 +1,3 @@
-This is the git repo for the sources of my [bookmarklets page](https://thomasleplus.github.io/bookmarklets).
+To view each bookmarklet source code, you can look into the [javascripts](/master/javascripts) folder of the master branch.
 
-See the [gh-pages](https://github.com/thomasleplus/bookmarklets/tree/gh-pages) branch for the source of the corresponding GitHub Pages website.
+There is also a [user-friendly](https://thomasleplus.github.io/bookmarklets) version of this repo. See the [gh-pages](https://github.com/thomasleplus/bookmarklets/tree/gh-pages) branch for the source of the corresponding GitHub Pages website.
