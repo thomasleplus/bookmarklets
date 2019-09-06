@@ -2,7 +2,7 @@
 name: Site bug report
 about: Create a report to help us improve
 title: "[SITE] "
-labels: ''
+labels: github pages
 assignees: thomasleplus
 
 ---
