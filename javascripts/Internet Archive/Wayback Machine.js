@@ -1,1 +1,1 @@
-location.href = 'https://web.archive.org/web/*/' + location.href;
+location.href = 'https://web.archive.org/web/%2A/' + location.href;
