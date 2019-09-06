@@ -1,1 +1,1 @@
-location.href = 'http://whois.domaintools.com/' + encodeURIComponent(location.hostname);
+location.href = 'https://whois.domaintools.com/' + encodeURIComponent(location.hostname);
