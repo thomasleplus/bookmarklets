@@ -1,0 +1,1 @@
+document.oncontextmenu = null;
