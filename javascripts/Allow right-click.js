@@ -1,1 +1,3 @@
-document.oncontextmenu = null;
+if (document.oncontextmenu) {
+  document.oncontextmenu = null;
+}
