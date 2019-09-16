@@ -1,5 +1,7 @@
 if (document.hasFocus()) {
-  window.alert('Password: ' + document.activeElement.value);
-} else {
-  window.alert('Move cursor in password field.');
+  if (document.activeElement.value) {
+    window.alert('Password: ' + document.activeElement.value);
+    return;
+  }
 }
+window.alert('Move cursor to desired password field.');
