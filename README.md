@@ -1,5 +1,5 @@
 
-![CodeQL](https://github.com/thomasleplus/bookmarklets/workflows/CodeQL/badge.svg)
+[![CodeQL](https://github.com/thomasleplus/bookmarklets/workflows/CodeQL/badge.svg)](https://github.com/thomasleplus/bookmarklets/actions?query=workflow:"CodeQL")
 
 To view each bookmarklet source code, you can browse the [javascripts](/javascripts) directory of the master branch.
 
