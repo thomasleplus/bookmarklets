@@ -1,4 +1,4 @@
-[![JSLint](https://github.com/thomasleplus/bookmarlets/workflows/JSLint/badge.svg)](https://github.com/thomasleplus/bookmarlets/actions?query=workflow:"JSLint")
+[![JSLint](https://github.com/thomasleplus/bookmarklets/workflows/JSLint/badge.svg)](https://github.com/thomasleplus/bookmarlets/actions?query=workflow:"JSLint")
 [![CodeQL](https://github.com/thomasleplus/bookmarklets/workflows/CodeQL/badge.svg)](https://github.com/thomasleplus/bookmarklets/actions?query=workflow:"CodeQL")
 
 To view each bookmarklet source code, you can browse the [javascripts](/javascripts) directory of the master branch.
