@@ -1,3 +1,4 @@
+/*global URL, URLSearchParams */
 "use strict";
 var url = new URL(location.href);
 var params = new URLSearchParams(url.search);
