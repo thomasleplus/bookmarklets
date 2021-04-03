@@ -2,7 +2,7 @@
 if (document.hasFocus()) {
     if (document.activeElement.autocomplete) {
         document.activeElement.autocomplete = 'on';
-        return;
     }
+} else {
+    window.alert('Move cursor to desired password field.');
 }
-window.alert('Move cursor to desired password field.');
