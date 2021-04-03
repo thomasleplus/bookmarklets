@@ -1,3 +1,4 @@
+"use strict";
 if (document.hasFocus()) {
   if (document.activeElement.autocomplete) {
     document.activeElement.autocomplete = 'on';
