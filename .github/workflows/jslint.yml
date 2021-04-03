@@ -18,4 +18,4 @@ jobs:
     - name: Install JSLint
       run: sudo npm install -g jslint
     - name: Run JSLint
-      run: jslint javascripts/*.js
+      run: jslint --browser javascripts/*.js
