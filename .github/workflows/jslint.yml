@@ -12,6 +12,8 @@ jobs:
   check:
     name: Check
     runs-on: ubuntu-latest
+    # run only on internal PRs, external ones already run on push.
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.repository
     steps:
     - name: Check out
       uses: actions/checkout@v2
