@@ -10,7 +10,7 @@ on:
 jobs:
 
   check:
-    name: Check
+    name: Check with JSLint
     runs-on: ubuntu-latest
     steps:
     - name: Check out
