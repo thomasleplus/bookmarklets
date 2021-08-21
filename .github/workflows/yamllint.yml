@@ -1,0 +1,21 @@
+name: "YAMLLint"
+
+on:
+  push:
+  pull_request:
+  schedule:
+  - cron: '0 0 * * 0'
+  workflow_dispatch:
+
+jobs:
+
+  check:
+    name: Check with YAMLLint
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out
+      uses: actions/checkout@v2
+    - name: Install YAMLLint
+      run: sudo pip install yamllint
+    - name: Run YAMLLint
+      run: "yamllint -d '{extends: relaxed, rules: {line-length: disable, trailing-spaces: disable}}' ."
