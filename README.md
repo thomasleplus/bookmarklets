@@ -1,3 +1,5 @@
+# Bookmarklets
+
 [![JSLint](https://github.com/thomasleplus/bookmarklets/workflows/JSLint/badge.svg)](https://github.com/thomasleplus/bookmarlets/actions?query=workflow:"JSLint")
 [![CodeQL](https://github.com/thomasleplus/bookmarklets/workflows/CodeQL/badge.svg)](https://github.com/thomasleplus/bookmarklets/actions?query=workflow:"CodeQL")
 
