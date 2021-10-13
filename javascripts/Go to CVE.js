@@ -17,7 +17,7 @@ if (selection === undefined) {
     } else {
         window.alert('Selection is not a valid CVE number.');
     }
-    if (url === undefined) {
+    if (url !== undefined) {
         window.open(url, '_blank').focus();
     }
 }
