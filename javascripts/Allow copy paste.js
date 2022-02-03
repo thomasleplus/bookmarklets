@@ -1,11 +1,10 @@
 "use strict";
-if (document.hasFocus()) {
-    if (document.activeElement.onCopy) {
-        document.activeElement.onCopy = null;
-    }
-    if (document.activeElement.onPaste) {
-        document.activeElement.onPaste = null;
-    }
-} else {
-    window.alert('Move cursor to desired text field.');
+var all = document.getElementsByTagName("*");
+for (var i=0, max=all.length; i < max; i++) {
+  if (all[i].onCopy) {
+    all[i].onCopy = null;
+  }
+  if (all[i].onPaste) {
+    all[i].onPaste = null;
+  }
 }
