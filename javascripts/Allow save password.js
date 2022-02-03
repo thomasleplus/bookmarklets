@@ -2,7 +2,7 @@
 var all = document.getElementsByTagName("*");
 var i;
 var max;
-for (i = 0, max = all.length; i < max; i++) {
+for (i = 0, max = all.length; i < max; i += 1) {
     if (all[i].autocomplete) {
         all[i].autocomplete = 'on';
     }
