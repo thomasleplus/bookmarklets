@@ -1,8 +1,7 @@
 "use strict";
-if (document.hasFocus()) {
-    if (document.activeElement.autocomplete) {
-        document.activeElement.autocomplete = 'on';
-    }
-} else {
-    window.alert('Move cursor to desired password field.');
+var all = document.getElementsByTagName("*");
+for (var i=0, max=all.length; i < max; i++) {
+  if (all[i].autocomplete) {
+    all[i].autocomplete = 'on';
+  }
 }
