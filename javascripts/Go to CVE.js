@@ -1,5 +1,5 @@
 "use strict";
-var selection;
+let selection;
 if (window.getSelection) {
     selection = window.getSelection().toString();
 } else if (document.selection && document.selection.type !== "Control") {
@@ -9,7 +9,7 @@ if (selection === undefined) {
     window.alert('Select the desired text.');
 } else {
     selection = selection.trim();
-    var url;
+    let url;
     if (selection.match(/^cve\-\d+\-\d+$/i)) {
         url = 'https://nvd.nist.gov/vuln/detail/' + selection;
     } else if (selection.match(/^\d+\-\d+$/)) {
