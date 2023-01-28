@@ -11,4 +11,4 @@ being supported with security updates.
 
 ## Reporting a Vulnerability
 
-For responsible disclosure, please contact me using the info on my [profile page](https://github.com/thomasleplus). Otherwise you can use [this link](https://github.com/thomasleplus/bookmarklets/issues/new?assignees=thomasleplus&labels=security&template=security_vulnerability.md&title=%5BVULN%5D) (GitHub account required) to report an issue publicly.
+For responsible disclosure, please use [this link](https://github.com/thomasleplus/bookmarklets/security/advisories/new) (GitHub account required) to report an issue privatly. Otherwise you can also contact me using the info on my [profile page](https://github.com/thomasleplus).
