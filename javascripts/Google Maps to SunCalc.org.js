@@ -4,7 +4,7 @@ var i;
 var coordinates;
 for (i = 0; i < pieces.length; i += 1) {
     if (pieces[i].startsWith('@')) {
-	pieces = pieces[i].substring(1).split(',');
+        pieces = pieces[i].substring(1).split(',');
         coordinates = pieces[0] + ',' + pieces[1] + ',19';
         break;
     }
