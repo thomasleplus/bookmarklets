@@ -1,7 +1,7 @@
 "use strict";
-var coordinates;
 var pieces = location.href.split('/');
-for (let i = 0; i < pieces.length; i++) {
+var coordinates;
+for (i = 0; i < pieces.length; i++) {
     if (pieces[i].startsWith('@')) {
 	coordinates = pieces[i].substring(1);
 	break;
