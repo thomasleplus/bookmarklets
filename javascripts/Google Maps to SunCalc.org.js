@@ -4,13 +4,13 @@ var i;
 var coordinates;
 for (i = 0; i < pieces.length; i += 1) {
     if (pieces[i].startsWith('@')) {
-	coordinates = pieces[i].substring(1);
+        coordinates = pieces[i].substring(1);
         break;
     }
 }
-if (coordinates == null) {
+if (coordinates === undefined || coordinates === null) {
     window.alert('Current Google Maps URL does not contain coordinates.');
 } else {
     var now = new Date();
-    location.href = 'https://www.suncalc.org/#/' + coordinates + '/' + now.getFullYear() + '.' + (now.getMonth() + 1) + '.' + now.getDate() + '/' + now.getHours() ':' + now.getMinutes() + '/1/3';
+    location.href = 'https://www.suncalc.org/#/' + coordinates + '/' + now.getFullYear() + '.' + (now.getMonth() + 1) + '.' + now.getDate() + '/' + now.getHours() + ':' + now.getMinutes() + '/1/3';
 }
