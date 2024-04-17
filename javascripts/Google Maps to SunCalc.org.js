@@ -1,15 +1,16 @@
 "use strict";
 var pieces = location.href.split('/');
+var i;
 var coordinates;
-for (i = 0; i < pieces.length; i++) {
+for (i = 0; i < pieces.length; i += 1) {
     if (pieces[i].startsWith('@')) {
 	coordinates = pieces[i].substring(1);
-	break;
+        break;
     }
 }
-if (typeof coordinates === 'undefined') {
+if (coordinates == null) {
     window.alert('Current Google Maps URL does not contain coordinates.');
 } else {
-    const now = new Date();
+    var now = new Date();
     location.href = 'https://www.suncalc.org/#/' + coordinates + '/' + now.getFullYear() + '.' + (now.getMonth() + 1) + '.' + now.getDate() + '/' + now.getHours() ':' + now.getMinutes() + '/1/3';
 }
