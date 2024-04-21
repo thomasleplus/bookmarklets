@@ -7,6 +7,10 @@ labels:
 assignees:
   - thomasleplus
 body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this feature request!
   - type: textarea
     attributes:
       label: Feature description
@@ -17,7 +21,7 @@ body:
       required: true
   - type: textarea
     attributes:
-      label: Implementation details
+      label: Anything else?
       description: |
         If you think that there are some implementation details to be taken into consideration, or anything that is not obvious from the previous description, please specify it here.
 
