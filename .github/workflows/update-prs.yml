@@ -1,0 +1,39 @@
+---
+name: Update PRs
+
+on:
+  push:
+  workflow_dispatch:
+
+permissions:
+  pull-requests: write
+  contents: write
+
+jobs:
+  update:
+    if: startsWith(github.ref, 'refs/heads/')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Update Pull Requests
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
+        with:
+          script: |
+            const opts = github.rest.pulls.list.endpoint.merge({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              base: context.ref.replace('refs/heads/', ''),
+            })
+            const prs = await github.paginate(opts)
+            for (const pr of prs) {
+              core.info(`Updating PR #${pr.number}`)
+              github.rest.pulls.updateBranch({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: pr.number,
+              }).then(function(result) {
+                core.info(JSON.stringify(result.data))
+              }).catch(function(error) {
+                core.error(error)
+              })
+            }
