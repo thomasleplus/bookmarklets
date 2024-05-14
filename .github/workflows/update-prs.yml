@@ -28,12 +28,14 @@ jobs:
             })
             const prs = await github.paginate(opts)
             for (const pr of prs) {
+              core.debug(JSON.stringify(pr))
               core.info(`Updating PR #${pr.number}`)
               github.rest.pulls.updateBranch({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 pull_number: pr.number,
               }).then(function(result) {
+                core.debug(JSON.stringify(result))
                 core.info(JSON.stringify(result.data))
               }).catch(function(error) {
                 core.error(error)
