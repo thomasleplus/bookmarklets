@@ -1,27 +1,40 @@
 ---
-name: "OSV Scanner"
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+# A sample workflow which sets up periodic OSV-Scanner scanning for vulnerabilities,
+# in addition to a PR check which fails if new vulnerabilities are introduced.
+#
+# For more examples and options, including how to ignore specific vulnerabilities,
+# see https://google.github.io/osv-scanner/github-action/
+
+name: OSV-Scanner
 
 on:
+  pull_request:
+    branches: [ "main" ]
+  push:
+    branches: [ "main" ]
   schedule:
-  - cron: '0 0 * * 0'
+    - cron: '0 0 * * 0'
   workflow_dispatch:
 
-permissions: {}
+permissions:
+  # Require writing security events to upload SARIF file to security tab
+  security-events: write
+  # Read commit contents
+  contents: read
+  # Actions read-only
+  actions: read
 
 jobs:
-
-  check:
-    name: Check with OSV Scanner
-    runs-on: ubuntu-latest
-    steps:
-    - name: Check out
-      uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
-    - name: Set up Go
-      uses: actions/setup-go@cdcb36043654635271a94b9a6d1392de5bb323a7 # v5.0.1
-      with:
-        go-version: 'stable'
-        check-latest: true
-    - name: Install OSV Scanner
-      run: go install github.com/google/osv-scanner/cmd/osv-scanner@v1
-    - name: OSV Scanner
-      run: 'PATH="${PATH}:$(go env GOPATH)/bin" osv-scanner -r .'
+  scan:
+    uses: "google/osv-scanner-action/.github/workflows/osv-scanner-reusable.yml@ba0b4d196d231340e0ae94ae00933c8be0984192" # v1.7.4
+    with:
+      # Example of specifying custom arguments
+      scan-args: |-
+        -r
+        --skip-git
+        ./
