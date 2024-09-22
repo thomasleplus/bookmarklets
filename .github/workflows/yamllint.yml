@@ -5,20 +5,19 @@ on:
   push:
   pull_request:
   schedule:
-  - cron: '0 0 * * 0'
+    - cron: "0 0 * * 0"
   workflow_dispatch:
 
 permissions: {}
 
 jobs:
-
   check:
     name: Check with YAMLLint
     runs-on: ubuntu-latest
     steps:
-    - name: Check out
-      uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
-    - name: Install YAMLLint
-      run: sudo pip install yamllint
-    - name: Run YAMLLint
-      run: "yamllint -d '{extends: relaxed, rules: {line-length: disable, trailing-spaces: disable}}' ."
+      - name: Check out
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+      - name: Install YAMLLint
+        run: sudo pip install yamllint
+      - name: Run YAMLLint
+        run: "yamllint -d '{extends: relaxed, rules: {line-length: disable, trailing-spaces: disable}}' ."
