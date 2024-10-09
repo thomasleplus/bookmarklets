@@ -17,7 +17,7 @@ jobs:
         if: env.RELEASE_TOKEN != ''
         run: echo "${RELEASE_TOKEN}" | gh auth login --with-token
       - name: Enable auto-merge for Dependabot PRs
-        run: gh pr merge --auto --squash "$PR_URL" && gh pr review --approve "$PR_URL"
+        run: gh pr merge --auto --squash "${PR_URL}" && gh pr review --approve "${PR_URL}"
         env:
           PR_URL: ${{github.event.pull_request.html_url}}
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
