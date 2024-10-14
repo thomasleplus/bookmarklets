@@ -17,7 +17,18 @@ jobs:
         if: env.RELEASE_TOKEN != ''
         run: echo "${RELEASE_TOKEN}" | gh auth login --with-token
       - name: Enable auto-merge for Dependabot PRs
-        run: gh pr merge --auto --squash "${PR_URL}" && gh pr review --approve "${PR_URL}"
+        run: |
+          gh pr merge --auto --squash "${PR_URL}"
+          # Checking the PR title is a poor substitute for the actual PR changes
+          # but as long as this is used only with dependabot PRs,
+          # it should be safe to assume that the title is not misleading.
+          regexp='^Bump .* from [0-9]+\.[0-9]+\.[0-9]+ to [0-9]+\.[0-9]+\.[0-9]+( in .*)?$'
+          if [[ "${PR_TITLE}" =~ $regexp ]]; then
+            gh pr review --approve "${PR_URL}"
+          else
+            echo 'Non-semver upgrade needs manual review'
+          fi
         env:
+          PR_TITLE: ${{github.event.pull_request.title}}
           PR_URL: ${{github.event.pull_request.html_url}}
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
