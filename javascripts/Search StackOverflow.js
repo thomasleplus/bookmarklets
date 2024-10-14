@@ -8,5 +8,5 @@ if (window.getSelection) {
 if (selection === undefined) {
     window.alert('Select the desired text to search.');
 } else {
-    window.open('https://stackoverflow.com/search?q=' + encodeURIComponent(selection.trim());, '_blank').focus();
+    window.open('https://stackoverflow.com/search?q=' + encodeURIComponent(selection.trim()), '_blank').focus();
 }

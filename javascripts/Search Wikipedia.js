@@ -8,5 +8,5 @@ if (window.getSelection) {
 if (selection === undefined) {
     window.alert('Select the desired text to search.');
 } else {
-    window.open('https://en.wikipedia.org/w/index.php?title=Special:Search&search=' + encodeURIComponent(selection.trim());, '_blank').focus();
+    window.open('https://en.wikipedia.org/w/index.php?title=Special:Search&search=' + encodeURIComponent(selection.trim()), '_blank').focus();
 }

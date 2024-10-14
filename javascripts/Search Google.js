@@ -8,5 +8,5 @@ if (window.getSelection) {
 if (selection === undefined) {
     window.alert('Select the desired text to search.');
 } else {
-    window.open('https://www.google.com/search?udm=14&q=' + encodeURIComponent(selection.trim());, '_blank').focus();
+    window.open('https://www.google.com/search?udm=14&q=' + encodeURIComponent(selection.trim()), '_blank').focus();
 }
