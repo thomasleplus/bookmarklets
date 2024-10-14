@@ -329,7 +329,7 @@
         function fillSection(section) {
           var script = section.getElementsByClassName('name')[0].innerHTML;
           console.debug('Loading ' + script);
-          fetch('https://raw.githubusercontent.com/{{site.github.repository_nwo}}/master/javascripts/' + encodeURIComponent(script) + '.js')
+          fetch('https://raw.githubusercontent.com/{{site.github.repository_nwo}}/main/javascripts/' + encodeURIComponent(script) + '.js')
             .then(function(response) {
               response.text()
                 .then(function(code) {
