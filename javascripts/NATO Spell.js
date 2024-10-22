@@ -48,7 +48,7 @@ if (selection === undefined) {
 } else {
     selection = selection.trim();
     var result = '';
-    for (let i = 0; i < selection.length; i++) {
+    for (i = 0; i < selection.length; i++) {
         var c = selection.charAt(i);
         var d = escape(c).replace(/%(..)/g, "&#x$1;");
         if (d === c) {
