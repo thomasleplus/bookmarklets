@@ -22,7 +22,7 @@ jobs:
           # Checking the PR title is a poor substitute for the actual PR changes
           # but as long as this is used only with dependabot PRs,
           # it should be safe to assume that the title is not misleading.
-          regexp='^Bump .* from [0-9]+\.[0-9]+\.[0-9]+ to [0-9]+\.[0-9]+\.[0-9]+( in .*)?$'
+          regexp='^Bump .* from [0-9]+\.[0-9]+\.[0-9]+(\.[0-9]+)? to [0-9]+\.[0-9]+\.[0-9]+(\.[0-9]+)?( in .*)?$'
           if [[ "${PR_TITLE}" =~ $regexp ]]; then
             gh pr review --approve "${PR_URL}"
           else
