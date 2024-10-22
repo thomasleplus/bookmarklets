@@ -16,8 +16,8 @@ body:
       label: Is there an existing issue for this?
       description: Search to see if an issue already exists for the bug you encountered.
       options:
-      - label: I have searched the existing issues
-        required: true
+        - label: I have searched the existing issues
+          required: true
   - type: textarea
     attributes:
       label: Current Behavior
@@ -36,7 +36,7 @@ body:
       description: |
         Version where you observed this issue
       placeholder: |
-          vX.Y.Z
+        vX.Y.Z
       render: markdown
     validations:
       required: true
