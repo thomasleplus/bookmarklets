@@ -49,7 +49,7 @@ if (selection === undefined) {
     selection = selection.trim();
     var result = '';
     var i;
-    for (i = 0; i < selection.length; i++) {
+    for (i = 0; i < selection.length; i += 1) {
         var c = selection.charAt(i);
         var d = escape(c).replace(/%(..)/g, "&#x$1;");
         if (d === c) {
