@@ -48,15 +48,15 @@ if (selection === undefined) {
 } else {
     selection = selection.trim();
     var result = '';
-    var i;
+    var i, c, d, t;
     for (i = 0; i < selection.length; i += 1) {
-        var c = selection.charAt(i);
-        var d = escape(c).replace(/%(..)/g, "&#x$1;");
+        c = selection.charAt(i);
+        d = escape(c).replace(/%(..)/g, "&#x$1;");
         if (d === c) {
             d = h[c];
         }
         if (d == null) {
-            var t = h[c.toUpperCase()];
+            t = h[c.toUpperCase()];
             if (t == null) {
                d = "&#x" + c.codePointAt(0).toString(16).toUpperCase() + ";";
             } else {
