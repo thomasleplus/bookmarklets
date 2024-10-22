@@ -51,16 +51,16 @@ if (selection === undefined) {
     var i, c, d, t;
     for (i = 0; i < selection.length; i += 1) {
         c = selection.charAt(i);
-        d = escape(c).replace(/%(..)/g, "&#x$1;");
+        d = encodeURIComponent(c);
         if (d === c) {
             d = h[c];
         }
-        if (d == null) {
+        if (d === undefined) {
             t = h[c.toUpperCase()];
-            if (t == null) {
-               d = "&#x" + c.codePointAt(0).toString(16).toUpperCase() + ";";
+            if (t === undefined) {
+                d = "%" + c.codePointAt(0).toString(16).toUpperCase();
             } else {
-               d = t.toLowerCase();
+                d = t.toLowerCase();
             }
         }
         result += d + ' ';
