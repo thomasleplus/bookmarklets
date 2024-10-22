@@ -55,7 +55,7 @@ if (selection === undefined) {
             d = h[c];
         }
         if (d == null) {
-            let t = h[c.toUpperCase()];
+            var t = h[c.toUpperCase()];
             if (t == null) {
                d = "&#x" + c.codePointAt(0).toString(16).toUpperCase() + ";";
             } else {
