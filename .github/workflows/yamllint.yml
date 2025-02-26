@@ -18,6 +18,8 @@ jobs:
       - name: Check out
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
       - name: Install YAMLLint
+        shell: bash
         run: sudo pip install yamllint
       - name: Run YAMLLint
+        shell: bash
         run: "yamllint -d '{extends: relaxed, rules: {line-length: disable, trailing-spaces: disable}}' ."

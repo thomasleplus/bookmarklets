@@ -16,8 +16,10 @@ jobs:
         env:
           RELEASE_TOKEN: ${{ secrets.RELEASE_TOKEN }}
         if: env.RELEASE_TOKEN != ''
+        shell: bash
         run: echo "${RELEASE_TOKEN}" | gh auth login --with-token
       - name: Enable auto-merge for Dependabot PRs
+        shell: bash
         run: |
           # Checking the PR title is a poor substitute for the actual PR changes
           # but as long as this is used only with dependabot PRs,
