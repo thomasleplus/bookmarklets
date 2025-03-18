@@ -11,7 +11,7 @@ on:
 permissions: {}
 
 jobs:
-  check:
+  lint:
     name: Check with YAMLLint
     runs-on: ubuntu-latest
     steps:
@@ -20,7 +20,7 @@ jobs:
       - name: Install YAMLLint
         shell: bash
         run: |
-          pip install yamllint==1.36.1
+          pip install yamllint==1.36.2
           msg="$(pip list --outdated | grep -e yamllint || true)"
           if [ -n "${msg}" ]; then
             >&2 echo "ERROR: outdated: ${msg}"

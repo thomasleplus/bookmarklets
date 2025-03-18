@@ -11,7 +11,7 @@ on:
 permissions: {}
 
 jobs:
-  check:
+  lint:
     name: Check with JSLint
     runs-on: ubuntu-latest
     steps:
