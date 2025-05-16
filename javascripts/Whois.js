@@ -1,2 +1,2 @@
 "use strict";
-location.href = 'https://whois.domaintools.com/' + encodeURIComponent(location.hostname);
+window.open('https://whois.domaintools.com/' + encodeURIComponent(location.hostname), '_blank').focus();

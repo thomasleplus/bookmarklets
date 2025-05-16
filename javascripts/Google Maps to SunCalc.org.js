@@ -13,5 +13,5 @@ if (coordinates === undefined || coordinates === null) {
     window.alert('Current Google Maps URL does not contain coordinates.');
 } else {
     var now = new Date();
-    location.href = 'https://www.suncalc.org/#/' + coordinates + '/' + now.getFullYear() + '.' + (now.getMonth() + 1) + '.' + now.getDate() + '/' + now.getHours() + ':' + now.getMinutes() + '/1/3';
+    window.open('https://www.suncalc.org/#/' + coordinates + '/' + now.getFullYear() + '.' + (now.getMonth() + 1) + '.' + now.getDate() + '/' + now.getHours() + ':' + now.getMinutes() + '/1/3', '_blank').focus();
 }
