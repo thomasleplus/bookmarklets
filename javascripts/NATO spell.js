@@ -43,7 +43,7 @@ if (window.getSelection) {
 } else if (document.selection && document.selection.type !== "Control") {
     selection = document.selection.createRange().text;
 }
-if (selection === undefined) {
+if (selection === undefined || selection.length === 0) {
     window.alert('Select the desired text.');
 } else {
     selection = selection.trim();
