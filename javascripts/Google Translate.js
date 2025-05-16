@@ -6,7 +6,7 @@ if (window.getSelection) {
     selection = document.selection.createRange().text;
 }
 if (selection === undefined) {
-    location.href = 'https://translate.google.com/translate?langpair=auto%7Cauto&u=' + encodeURIComponent(location.href);
+    location.href = 'https://translate.google.com/?op=websites&langpair=auto%7Cauto&u=' + encodeURIComponent(location.href);
 } else {
-    location.href = 'https://translate.google.com/translate?langpair=auto%7Cauto&ie=' + encodeURIComponent(document.characterSet) + '&text=' + encodeURIComponent(selection);
+    location.href = 'https://translate.google.com/?op=translate&langpair=auto%7Cauto&ie=' + encodeURIComponent(document.characterSet) + '&text=' + encodeURIComponent(selection);
 }
