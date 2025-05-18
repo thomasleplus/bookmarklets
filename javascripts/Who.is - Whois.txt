@@ -1,0 +1,1 @@
+Do a whois query on the domain that you are currently visiting using who.is.
