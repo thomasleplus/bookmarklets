@@ -1,0 +1,1 @@
+Use this bookmarklet to convert the current page's URL to a QR code using Google charts.

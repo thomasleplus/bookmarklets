@@ -1,0 +1,1 @@
+Translate the current selection using Google Translate. If there is no selection, the whole page will be translated.

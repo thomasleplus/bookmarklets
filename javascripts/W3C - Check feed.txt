@@ -1,0 +1,1 @@
+Use this bookmarklet to check the RSS or Atom feed that you are currently on with W3C's RSS validator.
