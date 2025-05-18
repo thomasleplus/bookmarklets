@@ -40,7 +40,7 @@
           <a href="{{ site.github.repository_url }}" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
         </section>
         <section id="copyright">
-          Copyright &copy; 2019 <a href="https://www.leplus.org" target="_blank">Thomas Leplus</a>.
+          Copyright &copy; 2019-{{ site.time | date: '%y' }} <a href="https://www.leplus.org" target="_blank">Thomas Leplus</a>.
         </section>
         <section id="license">
           Unless otherwise noted, the content of this site is licensed under <a href="{{site.github.license.url}}" target="_blank">{{site.github.license.name}}</a>.
@@ -64,9 +64,9 @@
 		      content.push(bookmarklet);
 		      bookmarklet.className = 'bookmarklet';
 		      var title = document.createElement('h3');
-		      bookmarklet.addChildren(title);
+		      bookmarklet.appendChild(title);
 		      var tlink = document.createElement('a');
-		      title.addChildren(tlink);
+		      title.appendChild(tlink);
 		      tlink.className = 'name';
 		      tlink.id = index[i].replaceAll(/^[a-zA-Z0-9\x21\$\x26\x27\(\)\*\+\x2c\x2d\.\/\x3a\x3b\x3d\?\x40_]/, '-').replaceAll(/\x2d+/, '-').trim();
 		      tlink.textContent = index[i].trim();
@@ -76,10 +76,10 @@
 			  .then((text) => {
 			      console.debug('Fetched description for ' + index[i]);
 			      var desc = document.createElement('h4');
-			      bookmarklet.addChildren(desc);
+			      bookmarklet.appendChild(desc);
 			      desc.textContent = 'Description';
 			      var description = document.createElement('p');
-			      bookmarklet.addChildren(description);
+			      bookmarklet.appendChild(description);
 			      description.textContent = text.trim();
 			  })
 			  .catch(console.error);
@@ -89,16 +89,16 @@
 			  .then((js) => {
 			      console.debug('Fetched source code for ' + index[i]);
 			      var book = document.createElement('h4');
-			      bookmarklet.addChildren(book);
+			      bookmarklet.appendChild(book);
 			      book.textContent = 'Bookmarklet';
 			      var instructions = document.createElement('p');
-			      bookmarklet.addChildren(instructions);
+			      bookmarklet.appendChild(instructions);
 			      instructions.innerHtml = 'Drag and drop or bookmark this link: <a href="javascript:(function()%7B' + encodeURIComponent(js.replace(/[\r\n\t]+/gm, ' ').replace(/\x20+/gm, ' ').trim()) + '%7D)()" class="url">Bookmarklet</a>';
 			      var code = document.createElement('h4');
-			      bookmarklet.addChildren(code);
+			      bookmarklet.appendChild(code);
 			      code.textContent = 'Source code';
 			      var source = document.createElement('code');
-			      bookmarklet.addChildren(source);
+			      bookmarklet.appendChild(source);
 			      source.textContent = js.trim();
 			  })
 			  .catch(console.error);
