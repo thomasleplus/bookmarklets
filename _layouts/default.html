@@ -60,8 +60,14 @@
 	      .catch(console.error);
 	  console.debug('Fetched index');
 	  content.push(document.createElement('hr'));
+	  var toc = document.createElement('section');
+	  content.push(toc);
+	  toc.id = 'toc';
+	  var ttoc = document.createElement('h3');
+	  toc.appendChild(ttoc);
+	  ttoc.textContent = 'Table of Content';
 	  var ul = document.createElement('ul');
-	  content.push(ul);
+	  toc.appendChild(ul);
 	  for (let i = 0; i < index.length; i++) {
 	      var li = document.createElement('ul');
 	      ul.appendChild(li);
