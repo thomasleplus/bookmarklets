@@ -91,7 +91,7 @@
 	      book.textContent = 'Bookmarklet';
 	      var instructions = document.createElement('p');
 	      bookmarklet.appendChild(instructions);
-	      instructions.innerHtml = 'Drag and drop or bookmark this link: <a href="javascript:(function()%7B' + encodeURIComponent(js.replace(/[\r\n\t]+/gm, ' ').replace(/\x20+/gm, ' ').trim()) + '%7D)()" class="url">Bookmarklet</a>';
+	      instructions.innerHTML = 'Drag and drop or bookmark this link: <a href="javascript:(function()%7B' + encodeURIComponent(js.replace(/[\r\n\t]+/gm, ' ').replace(/\x20+/gm, ' ').trim()) + '%7D)()" class="url">Bookmarklet</a>';
 	      var code = document.createElement('h4');
 	      bookmarklet.appendChild(code);
 	      code.textContent = 'Source code';
