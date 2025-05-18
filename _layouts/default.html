@@ -95,8 +95,11 @@
 	      var code = document.createElement('h4');
 	      bookmarklet.appendChild(code);
 	      code.textContent = 'Source code';
+	      var pre = document.createElement('pre');
+	      bookmarklet.appendChild(pre);
+	      pre.className = 'code';
 	      var source = document.createElement('code');
-	      bookmarklet.appendChild(source);
+	      pre.appendChild(source);
 	      source.textContent = js.trim();
 	  }
 	  content.push(document.createElement('hr'));
