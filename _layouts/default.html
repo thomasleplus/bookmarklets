@@ -65,7 +65,7 @@
 	  for (let i = 0; i < index.length; i++) {
 	      var li = document.createElement('ul');
 	      ul.appendChild(li);
-	      li.innerHTML = '<a href="' + encodeURIComponent(index[i].replaceAll(/[^a-zA-Z0-9\x21\$\x26\x27\(\)\*\+\x2c\x2d\.\/\x3a\x3b\x3d\?\x40_]/g, '-').replaceAll(/\x2d+/g, '-').trim()) + '">' + index[i] + '</a>';
+	      li.innerHTML = '<a href="#' + encodeURIComponent(index[i].replaceAll(/[^a-zA-Z0-9\x21\$\x26\x27\(\)\*\+\x2c\x2d\.\/\x3a\x3b\x3d\?\x40_]/g, '-').replaceAll(/\x2d+/g, '-').trim()) + '">' + index[i] + '</a>';
 	  }
 	  for (let i = 0; i < index.length; i++) {
 	      content.push(document.createElement('hr'));
