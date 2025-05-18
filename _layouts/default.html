@@ -68,7 +68,7 @@
 		      var tlink = document.createElement('a');
 		      title.appendChild(tlink);
 		      tlink.className = 'name';
-		      tlink.id = index[i].replaceAll(/[^a-zA-Z0-9\x21\$\x26\x27\(\)\*\+\x2c\x2d\.\/\x3a\x3b\x3d\?\x40_]/, '-').replaceAll(/\x2d+/, '-').trim();
+		      tlink.id = index[i].replaceAll(/[^a-zA-Z0-9\x21\$\x26\x27\(\)\*\+\x2c\x2d\.\/\x3a\x3b\x3d\?\x40_]/g, '-').replaceAll(/\x2d+/g, '-').trim();
 		      tlink.textContent = index[i].trim();
 		      console.debug('Fetching description for ' + index[i]);
 		      fetch('https://raw.githubusercontent.com/{{site.github.repository_nwo}}/main/javascripts/' + encodeURIComponent(index[i]) + '.txt')
