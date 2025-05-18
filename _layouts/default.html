@@ -106,7 +106,7 @@
 	      })
 	      .catch(console.error);
 	  content.push(document.createElement('hr'));
-	  section.replaceChildren(content);
+	  section.replaceChildren(...content);
       }
       fillSection(document.getElementById('bookmarklets'));
     </script>
