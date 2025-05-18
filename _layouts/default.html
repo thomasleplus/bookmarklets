@@ -50,61 +50,55 @@
 
     <script>
       "use strict";
-      function fillSection(section) {
+      async function fillSection(section) {
 	  var content = [];
 	  console.debug('Fetching index');
-          fetch('https://raw.githubusercontent.com/{{site.github.repository_nwo}}/main/javascripts/index.json')
+          var index = await fetch('https://raw.githubusercontent.com/{{site.github.repository_nwo}}/main/javascripts/index.json')
 	      .then((response) => response.json())
-	      .then((index) => {
-		  console.debug('Fetched index');
-		  for (let i = 0; i < index.length; i++) {
-		      content.push(document.createElement('hr'));
-		      console.debug('Adding ' + index[i]);
-		      var bookmarklet = document.createElement('section');
-		      content.push(bookmarklet);
-		      bookmarklet.className = 'bookmarklet';
-		      var title = document.createElement('h3');
-		      bookmarklet.appendChild(title);
-		      var tlink = document.createElement('a');
-		      title.appendChild(tlink);
-		      tlink.className = 'name';
-		      tlink.id = index[i].replaceAll(/[^a-zA-Z0-9\x21\$\x26\x27\(\)\*\+\x2c\x2d\.\/\x3a\x3b\x3d\?\x40_]/g, '-').replaceAll(/\x2d+/g, '-').trim();
-		      tlink.textContent = index[i].trim();
-		      console.debug('Fetching description for ' + index[i]);
-		      fetch('https://raw.githubusercontent.com/{{site.github.repository_nwo}}/main/javascripts/' + encodeURIComponent(index[i]) + '.txt')
-			  .then((response) => response.text())
-			  .then((text) => {
-			      console.debug('Fetched description for ' + index[i]);
-			      var desc = document.createElement('h4');
-			      bookmarklet.appendChild(desc);
-			      desc.textContent = 'Description';
-			      var description = document.createElement('p');
-			      bookmarklet.appendChild(description);
-			      description.textContent = text.trim();
-			  })
-			  .catch(console.error);
-		      console.debug('Fetching source code for ' + index[i]);
-		      fetch('https://raw.githubusercontent.com/{{site.github.repository_nwo}}/main/javascripts/' + encodeURIComponent(index[i]) + '.js')
-			  .then((response) => response.text())
-			  .then((js) => {
-			      console.debug('Fetched source code for ' + index[i]);
-			      var book = document.createElement('h4');
-			      bookmarklet.appendChild(book);
-			      book.textContent = 'Bookmarklet';
-			      var instructions = document.createElement('p');
-			      bookmarklet.appendChild(instructions);
-			      instructions.innerHtml = 'Drag and drop or bookmark this link: <a href="javascript:(function()%7B' + encodeURIComponent(js.replace(/[\r\n\t]+/gm, ' ').replace(/\x20+/gm, ' ').trim()) + '%7D)()" class="url">Bookmarklet</a>';
-			      var code = document.createElement('h4');
-			      bookmarklet.appendChild(code);
-			      code.textContent = 'Source code';
-			      var source = document.createElement('code');
-			      bookmarklet.appendChild(source);
-			      source.textContent = js.trim();
-			  })
-			  .catch(console.error);
-		  }
-	      })
 	      .catch(console.error);
+	  console.debug('Fetched index');
+	  for (let i = 0; i < index.length; i++) {
+	      content.push(document.createElement('hr'));
+	      console.debug('Adding ' + index[i]);
+	      var bookmarklet = document.createElement('section');
+	      content.push(bookmarklet);
+	      bookmarklet.className = 'bookmarklet';
+	      var title = document.createElement('h3');
+	      bookmarklet.appendChild(title);
+	      var tlink = document.createElement('a');
+	      title.appendChild(tlink);
+	      tlink.className = 'name';
+	      tlink.id = index[i].replaceAll(/[^a-zA-Z0-9\x21\$\x26\x27\(\)\*\+\x2c\x2d\.\/\x3a\x3b\x3d\?\x40_]/g, '-').replaceAll(/\x2d+/g, '-').trim();
+	      tlink.textContent = index[i].trim();
+	      console.debug('Fetching description for ' + index[i]);
+	      var text = await fetch('https://raw.githubusercontent.com/{{site.github.repository_nwo}}/main/javascripts/' + encodeURIComponent(index[i]) + '.txt')
+		  .then((response) => response.text())
+		  .catch(console.error);
+	      console.debug('Fetched description for ' + index[i]);
+	      var desc = document.createElement('h4');
+	      bookmarklet.appendChild(desc);
+	      desc.textContent = 'Description';
+	      var description = document.createElement('p');
+	      bookmarklet.appendChild(description);
+	      description.textContent = text.trim();
+	      console.debug('Fetching source code for ' + index[i]);
+	      var js = await fetch('https://raw.githubusercontent.com/{{site.github.repository_nwo}}/main/javascripts/' + encodeURIComponent(index[i]) + '.js')
+		  .then((response) => response.text())
+		  .catch(console.error);
+	      console.debug('Fetched source code for ' + index[i]);
+	      var book = document.createElement('h4');
+	      bookmarklet.appendChild(book);
+	      book.textContent = 'Bookmarklet';
+	      var instructions = document.createElement('p');
+	      bookmarklet.appendChild(instructions);
+	      instructions.innerHtml = 'Drag and drop or bookmark this link: <a href="javascript:(function()%7B' + encodeURIComponent(js.replace(/[\r\n\t]+/gm, ' ').replace(/\x20+/gm, ' ').trim()) + '%7D)()" class="url">Bookmarklet</a>';
+	      var code = document.createElement('h4');
+	      bookmarklet.appendChild(code);
+	      code.textContent = 'Source code';
+	      var source = document.createElement('code');
+	      bookmarklet.appendChild(source);
+	      source.textContent = js.trim();
+	  }
 	  content.push(document.createElement('hr'));
 	  section.replaceChildren(...content);
       }
