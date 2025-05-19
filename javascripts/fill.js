@@ -13,7 +13,7 @@ async function fillSection(section, path) {
     toc.id = 'toc';
     var ttoc = document.createElement('h3');
     toc.appendChild(ttoc);
-    ttoc.textContent = 'Table of Content';
+    ttoc.textContent = 'Table of Content (' + index.length + ')';
     var ul = document.createElement('ul');
     toc.appendChild(ul);
     for (let i = 0; i < index.length; i++) {
