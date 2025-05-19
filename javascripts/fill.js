@@ -58,7 +58,7 @@ async function fillSection(section, path) {
         code.textContent = 'Source code';
         var pre = document.createElement('pre');
         bookmarklet.appendChild(pre);
-        pre.className = 'code';
+        pre.className = 'highlight';
         var source = document.createElement('code');
         pre.appendChild(source);
         source.textContent = js.trim();
