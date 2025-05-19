@@ -19,13 +19,13 @@ async function fillSection(section, path) {
     for (let i = 0; i < index.length; i++) {
         var li = document.createElement('ul');
         ul.appendChild(li);
-        li.innerHTML = '<a href="#' + encodeURIComponent(index[i].replaceAll(/[^a-zA-Z0-9\x21\$\x26\x27\(\)\*\+\x2c\x2d\.\/\x3a\x3b\x3d\?\x40_]/g, '-').replaceAll(/\x2d+/g, '-').trim()) + '">' + index[i] + '</a>';
+        li.innerHTML = '<a href="#' + encodeURIComponent(index[i].name.replaceAll(/[^a-zA-Z0-9\x21\$\x26\x27\(\)\*\+\x2c\x2d\.\/\x3a\x3b\x3d\?\x40_]/g, '-').replaceAll(/\x2d+/g, '-')) + '">' + index[i].name + '</a>';
     }
     var loading = document.getElementById('loading');
     for (let i = 0; i < index.length; i++) {
         loading.textContent += '.';
         content.push(document.createElement('hr'));
-        console.debug('Adding ' + index[i]);
+        console.debug('Adding ' + index[i].name);
         var bookmarklet = document.createElement('section');
         content.push(bookmarklet);
         bookmarklet.className = 'bookmarklet';
@@ -34,30 +34,25 @@ async function fillSection(section, path) {
         var tlink = document.createElement('a');
         title.appendChild(tlink);
         tlink.className = 'name';
-        tlink.id = index[i].replaceAll(/[^a-zA-Z0-9\x21\$\x26\x27\(\)\*\+\x2c\x2d\.\/\x3a\x3b\x3d\?\x40_]/g, '-').replaceAll(/\x2d+/g, '-').trim();
-        tlink.textContent = index[i].trim();
-        console.debug('Fetching description for ' + index[i]);
-        var text = await fetch('https://raw.githubusercontent.com/' + path + '/main/javascripts/' + encodeURIComponent(index[i]) + '.txt')
-            .then((response) => response.text())
-            .catch(console.error);
-        console.debug('Fetched description for ' + index[i]);
+        tlink.id = index[i].name.replaceAll(/[^a-zA-Z0-9\x21\$\x26\x27\(\)\*\+\x2c\x2d\.\/\x3a\x3b\x3d\?\x40_]/g, '-').replaceAll(/\x2d+/g, '-');
+        tlink.textContent = index[i].name;
         var desc = document.createElement('h4');
         bookmarklet.appendChild(desc);
         desc.textContent = 'Description';
         var description = document.createElement('p');
         bookmarklet.appendChild(description);
-        description.textContent = text.trim();
-        console.debug('Fetching source code for ' + index[i]);
-        var js = await fetch('https://raw.githubusercontent.com/' + path + '/main/javascripts/' + encodeURIComponent(index[i]) + '.js')
+        description.textContent = index[i].description;
+        console.debug('Fetching source code for ' + index[i].name);
+        var js = await fetch('https://raw.githubusercontent.com/' + path + '/main/javascripts/' + encodeURIComponent(index[i].name) + '.js')
             .then((response) => response.text())
             .catch(console.error);
-        console.debug('Fetched source code for ' + index[i]);
+        console.debug('Fetched source code for ' + index[i].name);
         var book = document.createElement('h4');
         bookmarklet.appendChild(book);
         book.textContent = 'Bookmarklet';
         var instructions = document.createElement('p');
         bookmarklet.appendChild(instructions);
-        instructions.innerHTML = 'Drag and drop or bookmark this link: <a href="javascript:(function()%7B' + encodeURIComponent(js.replace(/[\r\n\t]+/gm, ' ').replace(/\x20+/gm, ' ').trim()) + '%7D)()">' + index[i] + '</a>';
+        instructions.innerHTML = 'Drag and drop or bookmark this link: <a href="javascript:(function()%7B' + encodeURIComponent(js.replace(/[\r\n\t]+/gm, ' ').replace(/\x20+/gm, ' ').trim()) + '%7D)()">' + index[i].name + '</a>';
         var code = document.createElement('h4');
         bookmarklet.appendChild(code);
         code.textContent = 'Source code';
