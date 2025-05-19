@@ -17,7 +17,7 @@ async function fillSection(section, path) {
     var ul = document.createElement('ul');
     toc.appendChild(ul);
     for (let i = 0; i < index.length; i++) {
-        var li = document.createElement('ul');
+        var li = document.createElement('li');
         ul.appendChild(li);
         li.innerHTML = '<a href="#' + encodeURIComponent(index[i].name.replaceAll(/[^a-zA-Z0-9\x21\$\x26\x27\(\)\*\+\x2c\x2d\.\/\x3a\x3b\x3d\?\x40_]/g, '-').replaceAll(/\x2d+/g, '-')) + '">' + index[i].name + '</a>';
     }
