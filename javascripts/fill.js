@@ -1,9 +1,9 @@
 "use strict";
 
-async function fillSection(section) {
+async function fillSection(section, path) {
     var content = [];
     console.debug('Fetching index');
-    var index = await fetch('https://raw.githubusercontent.com/{{site.github.repository_nwo}}/main/javascripts/index.json')
+    var index = await fetch('https://raw.githubusercontent.com/' + path + '/main/javascripts/index.json')
         .then((response) => response.json())
         .catch(console.error);
     console.debug('Fetched index');
@@ -37,7 +37,7 @@ async function fillSection(section) {
         tlink.id = index[i].replaceAll(/[^a-zA-Z0-9\x21\$\x26\x27\(\)\*\+\x2c\x2d\.\/\x3a\x3b\x3d\?\x40_]/g, '-').replaceAll(/\x2d+/g, '-').trim();
         tlink.textContent = index[i].trim();
         console.debug('Fetching description for ' + index[i]);
-        var text = await fetch('https://raw.githubusercontent.com/{{site.github.repository_nwo}}/main/javascripts/' + encodeURIComponent(index[i]) + '.txt')
+        var text = await fetch('https://raw.githubusercontent.com/' + path + '/main/javascripts/' + encodeURIComponent(index[i]) + '.txt')
             .then((response) => response.text())
             .catch(console.error);
         console.debug('Fetched description for ' + index[i]);
@@ -48,7 +48,7 @@ async function fillSection(section) {
         bookmarklet.appendChild(description);
         description.textContent = text.trim();
         console.debug('Fetching source code for ' + index[i]);
-        var js = await fetch('https://raw.githubusercontent.com/{{site.github.repository_nwo}}/main/javascripts/' + encodeURIComponent(index[i]) + '.js')
+        var js = await fetch('https://raw.githubusercontent.com/' + path + '/main/javascripts/' + encodeURIComponent(index[i]) + '.js')
             .then((response) => response.text())
             .catch(console.error);
         console.debug('Fetched source code for ' + index[i]);
