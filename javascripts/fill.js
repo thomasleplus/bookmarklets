@@ -72,4 +72,3 @@ async function fillSection(section) {
     section.replaceChildren(...content);
 }
 
-fillSection(document.getElementById('bookmarklets'));

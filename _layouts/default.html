@@ -5,11 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+    <script src="{{ '/javascripts/fill.js' | relative_url }}"></script>
 
 {% seo %}
   </head>
 
-  <body>
+  <body onload="fillSection(document.getElementById('bookmarklets'));">
 
     <header>
       <div class="container">
@@ -27,7 +28,7 @@
     <div class="container">
       <section id="bookmarklets">
 	<hr/>
-	<div id="loading">Please wait while content is loading...</div>
+	<div id="loading">Please wait while content is loading.</div>
 	<hr/>
       </section>
     </div>
@@ -49,8 +50,6 @@
         </section>
       </div>
     </footer>
-
-    <script src="{{ '/javascripts/fill.js' | relative_url }}"></script>
     
   </body>
 </html>
