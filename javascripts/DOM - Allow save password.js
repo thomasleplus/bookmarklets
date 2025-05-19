@@ -1,7 +1,8 @@
 "use strict";
-var e;
-for (e in document.getElementsByTagName("*")) {
-    if (e.autocomplete) {
-        e.autocomplete = 'on';
+var e = document.getElementsByTagName("*");
+var i;
+for (i = 0; i < e.length; i += 1) {
+    if (e[i].autocomplete) {
+        e[i].autocomplete = 'on';
     }
 }

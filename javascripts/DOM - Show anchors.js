@@ -1,8 +1,8 @@
 "use strict";
-var anchor, id;
+var i, id;
 var anchors = document.getElementsByTagName("a");
-for (anchor in anchors) {
-    id = anchor.id;
+for (i = 0; i < anchors.length; i += 1) {
+    id = anchors[i].id;
     if (id !== undefined && id.length > 0) {
         anchor.appendChild(document.createTextNode(" #" + id));
     }
