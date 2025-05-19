@@ -1,11 +1,11 @@
 "use strict";
 var pieces = location.href.split('/');
-var i;
+var piece;
 var coordinates;
-for (i = 0; i < pieces.length; i += 1) {
-    if (pieces[i].startsWith('@')) {
-        pieces = pieces[i].substring(1).split(',');
-        coordinates = pieces[0] + ',' + pieces[1] + ',19';
+for (piece in pieces) {
+    if (piece.startsWith('@')) {
+        piece = piece.substring(1).split(',');
+        coordinates = piece[0] + ',' + piece[1] + ',19';
         break;
     }
 }
