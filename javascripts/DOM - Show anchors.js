@@ -1,6 +1,6 @@
 "use strict";
 var anchors = document.anchors;
-for (i=0; i < anchors.length; ++i) {
+for (i = 0; i < anchors.length; i += 1) {
     var anchor = anchors[i];
     var name = anchor.name;
     if (name !== undefined && name.length > 0) {
