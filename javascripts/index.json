@@ -44,8 +44,16 @@
     "description": "This bookmarklet reenables every element that is disabled in the page (button, text field, etc.)."
   },
   {
+    "name": "Google Search - Search definition for selection",
+    "description": "Search for a definition related to the current selection using Google."
+  },
+  {
     "name": "Google Search - Search related sites",
     "description": "Search for sites related to the current one using Google."
+  },
+  {
+    "name": "Google Search - Search weather for selection",
+    "description": "Search for weather information related to the current selection using Google."
   },
   {
     "name": "Reddit - Search selection",
