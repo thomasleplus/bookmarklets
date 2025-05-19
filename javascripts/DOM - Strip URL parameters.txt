@@ -1,1 +1,0 @@
-Use this bookmarklet to remove all the URL parameters of the page that you are currently on.

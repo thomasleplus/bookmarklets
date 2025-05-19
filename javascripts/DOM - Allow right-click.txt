@@ -1,1 +1,0 @@
-This bookmarklet reenables the right-click context menu on a page.

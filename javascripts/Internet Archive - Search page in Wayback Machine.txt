@@ -1,1 +1,0 @@
-Use this bookmarklet to do a Internet Archive search for old versions of the page that you are currently on.

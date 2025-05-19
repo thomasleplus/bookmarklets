@@ -1,1 +1,0 @@
-This bookmarklet changes the sort order of your current Amazon product search to order the results by descending number of user reviews. I find that using this sort in combination with the "Avg. Customer Review" filter greatly improves my searches.

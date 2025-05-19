@@ -1,1 +1,0 @@
-Use this bookmarklet to search the current text selection on YouTube. Most web browsers only support a single default search engine. This bookmarklet can be used as a shortcut to use an alternate search engine.

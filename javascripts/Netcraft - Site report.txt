@@ -1,1 +1,0 @@
-Use this bookmarklet to check the site that you are currently on with Netcraft Site report.

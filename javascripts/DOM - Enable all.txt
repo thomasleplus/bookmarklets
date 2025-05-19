@@ -1,1 +1,0 @@
-This bookmarklet reenables every element that is disabled in the page (button, text field, etc.).

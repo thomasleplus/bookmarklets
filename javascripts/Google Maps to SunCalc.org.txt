@@ -1,1 +1,0 @@
-Use this bookmarklet to convert the currently opened Google Maps page to SunCalc.org.

@@ -1,1 +1,0 @@
-This bookmarklet reenables copy/paste on all elements in the page (typically a text field or text area).

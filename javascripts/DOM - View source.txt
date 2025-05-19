@@ -1,1 +1,0 @@
-This bookmarklet opens a new window to display the source code of the current page. This feature is typically not available on mobile web browsers so this bookmarklet is an way to re-implement this feature using JavaScript.
