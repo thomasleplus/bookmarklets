@@ -1,115 +1,23 @@
 [
   {
-    "name": "StackOverflow - Search selection",
-    "description": "Use this bookmarklet to search the current text selection on StackOverflow. Most web browsers only support a single default search engine. This bookmarklet can be used as a shortcut to use an alternate search engine."
-  },
-  {
-    "name": "Google Translate - Translate page or selection",
-    "description": "Translate the current selection using Google Translate. If there is no selection, the whole page will be translated."
-  },
-  {
-    "name": "W3C - Check page internationalization",
-    "description": "Use this bookmarklet to check the page that you are currently on with W3C's internationalization validator."
-  },
-  {
-    "name": "W3C - Check feed",
-    "description": "Use this bookmarklet to check the RSS or Atom feed that you are currently on with W3C's RSS validator."
-  },
-  {
-    "name": "Google Maps to SunCalc.org",
-    "description": "Use this bookmarklet to convert the currently opened Google Maps page to SunCalc.org."
-  },
-  {
     "name": "Amazon - Search selection",
     "description": "Use this bookmarklet to search the current text selection on Amazon. Most web browsers only support a single default search engine. This bookmarklet can be used as a shortcut to use an alternate search engine."
-  },
-  {
-    "name": "Whois.com - Whois",
-    "description": "Do a whois query on the domain that you are currently visiting using whois.com."
-  },
-  {
-    "name": "SSLLabs - SSL server test",
-    "description": "Run a SSLLabs SSL audit on the server that you are currently on."
-  },
-  {
-    "name": "MXToolBox - SuperTool",
-    "description": "Run MXToolBox SuperTool on the server that you are currently on."
-  },
-  {
-    "name": "Shodan - Search site",
-    "description": "Search the current site on Shodan."
-  },
-  {
-    "name": "DOM - Enable all",
-    "description": "This bookmarklet reenables every element that is disabled in the page (button, text field, etc.)."
-  },
-  {
-    "name": "Google Search - Search definition for selection",
-    "description": "Search for a definition related to the current selection using Google."
-  },
-  {
-    "name": "Google Search - Search related sites",
-    "description": "Search for sites related to the current one using Google."
-  },
-  {
-    "name": "Google Search - Search weather for selection",
-    "description": "Search for weather information related to the current selection using Google."
-  },
-  {
-    "name": "Reddit - Search selection",
-    "description": "Use this bookmarklet to search the current text selection on Reddit. Most web browsers only support a single default search engine. This bookmarklet can be used as a shortcut to use an alternate search engine."
-  },
-  {
-    "name": "YouTube - Search selection",
-    "description": "Use this bookmarklet to search the current text selection on YouTube. Most web browsers only support a single default search engine. This bookmarklet can be used as a shortcut to use an alternate search engine."
-  },
-  {
-    "name": "Netcraft - Site report",
-    "description": "Use this bookmarklet to check the site that you are currently on with Netcraft Site report."
-  },
-  {
-    "name": "Domaintools - Whois",
-    "description": "Do a whois query on the domain that you are currently visiting using whois.domaintools.com."
-  },
-  {
-    "name": "Internet Archive - Search page in Wayback Machine",
-    "description": "Use this bookmarklet to do a Internet Archive search for old versions of the page that you are currently on."
-  },
-  {
-    "name": "DOM - Allow copy paste",
-    "description": "This bookmarklet reenables copy/paste on all elements in the page (typically a text field or text area)."
-  },
-  {
-    "name": "Who.is - Whois",
-    "description": "Do a whois query on the domain that you are currently visiting using who.is."
-  },
-  {
-    "name": "Google Search - Search site",
-    "description": "Use this bookmarklet to do a Google search restricted to pages from the domain that you are currently on."
   },
   {
     "name": "Amazon - Sort by number of reviews",
     "description": "This bookmarklet changes the sort order of your current Amazon product search to order the results by descending number of user reviews. I find that using this sort in combination with the 'Avg. Customer Review' filter greatly improves my searches."
   },
   {
-    "name": "Google Safe Browsing - Check page status",
-    "description": "Use this bookmarklet to check the page that you are currently on with Google Safe Browsing report."
-  },
-  {
-    "name": "W3C - Check page links",
-    "description": "Use this bookmarklet to check the page that you are currently on with W3C's broken links report."
-  },
-  {
-    "name": "Google Maps - Search selection",
-    "description": "Use this bookmarklet to search the current text selection on Google Maps. Most web browsers only support a single default search engine. This bookmarklet can be used as a shortcut to use an alternate search engine."
-  },
-  {
-    "name": "Google Search - Search selection",
-    "description": "Use this bookmarklet to search the current text selection on Google Web. Most web browsers only support a single default search engine. This bookmarklet can be used as a shortcut to use an alternate search engine."
-  },
-  {
     "name": "Archive.today - Submit page",
     "description": "Use this bookmarklet to do a Internet Archive search for old versions of the page that you are currently on."
+  },
+  {
+    "name": "Bing - Search selection",
+    "description": "Use this bookmarklet to search the current text selection on Bing. Most web browsers only support a single default search engine. This bookmarklet can be used as a shortcut to use an alternate search engine."
+  },
+  {
+    "name": "DOM - Allow copy paste",
+    "description": "This bookmarklet reenables copy/paste on all elements in the page (typically a text field or text area)."
   },
   {
     "name": "DOM - Allow right-click",
@@ -120,28 +28,108 @@
     "description": "This bookmarklet displays the current value of a masked password field. To use the bookmarklet, simply click inside the password field that you want to be able to save, then click on the bookmarklet."
   },
   {
-    "name": "Bing - Search selection",
-    "description": "Use this bookmarklet to search the current text selection on Bing. Most web browsers only support a single default search engine. This bookmarklet can be used as a shortcut to use an alternate search engine."
+    "name": "DOM - Enable all",
+    "description": "This bookmarklet reenables every element that is disabled in the page (button, text field, etc.)."
   },
   {
-    "name": "DOM - Strip URL parameters",
-    "description": "Use this bookmarklet to remove all the URL parameters of the page that you are currently on."
-  },
-  {
-    "name": "DuckDuckGo - Search selection",
-    "description": "Use this bookmarklet to search the current text selection on DuckDuckGo. Most web browsers only support a single default search engine. This bookmarklet can be used as a shortcut to use an alternate search engine."
+    "name": "DOM - NATO spell selection",
+    "description": "This bookmarklet spells the current selection using NATO alphabet. The case of the NATO name will be the same at the case of the original character. Characters that are not part of the NATO alphabet will be percent-encoding (e.g. %2F for '/') to help identify them. This bookmarklet can be used to identify characters that are ambiguous in certain typefaces. For example the number zero (0) will be spelled 'zero' while the letter capital O will be spelled 'Oscar'."
   },
   {
     "name": "DOM - Show password",
     "description": "This bookmarklet displays the current value of a masked password field. To use the bookmarklet, simply click inside the password field that you want to be able to save, then click on the bookmarklet."
   },
   {
-    "name": "NIST NVD - Go to selected CVE",
-    "description": "This bookmarklet opens a new window to display the selected CVE information."
+    "name": "DOM - Strip URL parameters",
+    "description": "Use this bookmarklet to remove all the URL parameters of the page that you are currently on."
   },
   {
     "name": "DOM - View source",
     "description": "This bookmarklet opens a new window to display the source code of the current page. This feature is typically not available on mobile web browsers so this bookmarklet is an way to re-implement this feature using JavaScript."
+  },
+  {
+    "name": "Domaintools - Whois",
+    "description": "Do a whois query on the domain that you are currently visiting using whois.domaintools.com."
+  },
+  {
+    "name": "DuckDuckGo - Search selection",
+    "description": "Use this bookmarklet to search the current text selection on DuckDuckGo. Most web browsers only support a single default search engine. This bookmarklet can be used as a shortcut to use an alternate search engine."
+  },
+  {
+    "name": "Google Maps - Search selection",
+    "description": "Use this bookmarklet to search the current text selection on Google Maps. Most web browsers only support a single default search engine. This bookmarklet can be used as a shortcut to use an alternate search engine."
+  },
+  {
+    "name": "Google Maps to SunCalc.org",
+    "description": "Use this bookmarklet to convert the currently opened Google Maps page to SunCalc.org."
+  },
+  {
+    "name": "Google Safe Browsing - Check page status",
+    "description": "Use this bookmarklet to check the page that you are currently on with Google Safe Browsing report."
+  },
+  {
+    "name": "Google Search - Search definition for selection",
+    "description": "Search for a definition related to the current selection using Google."
+  },
+  {
+    "name": "Google Search - Search related sites",
+    "description": "Search for sites related to the current one using Google."
+  },
+  {
+    "name": "Google Search - Search selection",
+    "description": "Use this bookmarklet to search the current text selection on Google Web. Most web browsers only support a single default search engine. This bookmarklet can be used as a shortcut to use an alternate search engine."
+  },
+  {
+    "name": "Google Search - Search site",
+    "description": "Use this bookmarklet to do a Google search restricted to pages from the domain that you are currently on."
+  },
+  {
+    "name": "Google Search - Search weather for selection",
+    "description": "Search for weather information related to the current selection using Google."
+  },
+  {
+    "name": "Google Translate - Translate page or selection",
+    "description": "Translate the current selection using Google Translate. If there is no selection, the whole page will be translated."
+  },
+  {
+    "name": "IMDb - Search selection",
+    "description": "Use this bookmarklet to search the current text selection on IMDb. Most web browsers only support a single default search engine. This bookmarklet can be used as a shortcut to use an alternate search engine."
+  },
+  {
+    "name": "Internet Archive - Search page in Wayback Machine",
+    "description": "Use this bookmarklet to do a Internet Archive search for old versions of the page that you are currently on."
+  },
+  {
+    "name": "MXToolBox - SuperTool",
+    "description": "Run MXToolBox SuperTool on the server that you are currently on."
+  },
+  {
+    "name": "NIST NVD - Go to selected CVE",
+    "description": "This bookmarklet opens a new window to display the selected CVE information."
+  },
+  {
+    "name": "Netcraft - Site report",
+    "description": "Use this bookmarklet to check the site that you are currently on with Netcraft Site report."
+  },
+  {
+    "name": "Reddit - Search selection",
+    "description": "Use this bookmarklet to search the current text selection on Reddit. Most web browsers only support a single default search engine. This bookmarklet can be used as a shortcut to use an alternate search engine."
+  },
+  {
+    "name": "SSLLabs - SSL server test",
+    "description": "Run a SSLLabs SSL audit on the server that you are currently on."
+  },
+  {
+    "name": "Shodan - Search site",
+    "description": "Search the current site on Shodan."
+  },
+  {
+    "name": "StackOverflow - Search selection",
+    "description": "Use this bookmarklet to search the current text selection on StackOverflow. Most web browsers only support a single default search engine. This bookmarklet can be used as a shortcut to use an alternate search engine."
+  },
+  {
+    "name": "W3C - Check feed",
+    "description": "Use this bookmarklet to check the RSS or Atom feed that you are currently on with W3C's RSS validator."
   },
   {
     "name": "W3C - Check page CSS",
@@ -152,15 +140,27 @@
     "description": "Use this bookmarklet to check the HTML of the page that you are currently on with W3C's Nu Html Checker."
   },
   {
-    "name": "DOM - NATO spell selection",
-    "description": "This bookmarklet spells the current selection using NATO alphabet. The case of the NATO name will be the same at the case of the original character. Characters that are not part of the NATO alphabet will be percent-encoding (e.g. %2F for '/') to help identify them. This bookmarklet can be used to identify characters that are ambiguous in certain typefaces. For example the number zero (0) will be spelled 'zero' while the letter capital O will be spelled 'Oscar'."
+    "name": "W3C - Check page internationalization",
+    "description": "Use this bookmarklet to check the page that you are currently on with W3C's internationalization validator."
+  },
+  {
+    "name": "W3C - Check page links",
+    "description": "Use this bookmarklet to check the page that you are currently on with W3C's broken links report."
+  },
+  {
+    "name": "Who.is - Whois",
+    "description": "Do a whois query on the domain that you are currently visiting using who.is."
+  },
+  {
+    "name": "Whois.com - Whois",
+    "description": "Do a whois query on the domain that you are currently visiting using whois.com."
   },
   {
     "name": "Wikipedia - Search selection",
     "description": "Use this bookmarklet to search the current text selection on Wikipedia. Most web browsers only support a single default search engine. This bookmarklet can be used as a shortcut to use an alternate search engine."
   },
   {
-    "name": "IMDb - Search selection",
-    "description": "Use this bookmarklet to search the current text selection on IMDb. Most web browsers only support a single default search engine. This bookmarklet can be used as a shortcut to use an alternate search engine."
+    "name": "YouTube - Search selection",
+    "description": "Use this bookmarklet to search the current text selection on YouTube. Most web browsers only support a single default search engine. This bookmarklet can be used as a shortcut to use an alternate search engine."
   }
 ]
