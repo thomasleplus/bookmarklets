@@ -1,7 +1,7 @@
 "use strict";
 
 function minify(js) {
-    return 'javascript:(function()%7B' + encodeURIComponent(js.replace(/[\r\n\t]+/gm, ' ').replace(/\x20+/gm, ' ').trim()) + '%7D)()">' + index[i].name;
+    return 'javascript:(function()%7B' + encodeURIComponent(js.replace(/[\r\n\t]+/gm, ' ').replace(/\x20+/gm, ' ').trim()) + '%7D)()';
 }
 
 async function fillSection(section, path) {
@@ -56,7 +56,7 @@ async function fillSection(section, path) {
         book.textContent = 'Bookmarklet';
         var instructions = document.createElement('p');
         bookmarklet.appendChild(instructions);
-        instructions.innerHTML = 'Drag and drop or bookmark this link: <a href="' + minify(js) + '</a>';
+        instructions.innerHTML = 'Drag and drop or bookmark this link: <a href="' + minify(js) + '>' + index[i].name + '</a>';
         var code = document.createElement('h4');
         bookmarklet.appendChild(code);
         code.textContent = 'Source code';
