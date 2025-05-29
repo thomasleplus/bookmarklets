@@ -1,4 +1,5 @@
 "use strict";
+/*global URL, URLSearchParams */
 var url = new URL(location.href);
 var params = new URLSearchParams(url.search);
 if (!params.get('rh') && !params.get('i')) {
