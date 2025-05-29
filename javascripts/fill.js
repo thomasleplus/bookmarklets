@@ -55,7 +55,7 @@ async function init(path) {
   ttoc.textContent = "Examples (" + index.length + ")";
   var ul = document.createElement("ul");
   toc.appendChild(ul);
-  for (let i = 0; i < index.length; i++) {
+  for (var i = 0; i < index.length; i++) {
     var li = document.createElement("li");
     ul.appendChild(li);
     li.innerHTML =
@@ -66,7 +66,7 @@ async function init(path) {
       "</a>";
   }
   var loading = document.getElementById("loading");
-  for (let i = 0; i < index.length; i++) {
+  for (var i = 0; i < index.length; i++) {
     loading.textContent += ".";
     content.push(document.createElement("hr"));
     console.debug("Adding " + index[i].name);
