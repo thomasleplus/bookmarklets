@@ -41,7 +41,9 @@ async function init(path) {
       path +
       "/main/javascripts/index.json"
   )
-    .then((response) => response.json())
+    .then(function (response) {
+      return response.json();
+    })
     .catch(console.error);
   console.debug("Fetched index");
   content.push(document.createElement("hr"));
@@ -92,7 +94,9 @@ async function init(path) {
         encodeURIComponent(index[i].name) +
         ".js"
     )
-      .then((response) => response.text())
+      .then(function (response) {
+        return response.text();
+      })
       .catch(console.error);
     console.debug("Fetched source code for " + index[i].name);
     var book = document.createElement("h4");
