@@ -39,7 +39,7 @@ async function init(path) {
   var index = await fetch(
     "https://raw.githubusercontent.com/" +
       path +
-      "/main/javascripts/index.json",
+      "/main/javascripts/index.json"
   )
     .then((response) => response.json())
     .catch(console.error);
@@ -90,7 +90,7 @@ async function init(path) {
         path +
         "/main/javascripts/" +
         encodeURIComponent(index[i].name) +
-        ".js",
+        ".js"
     )
       .then((response) => response.text())
       .catch(console.error);
