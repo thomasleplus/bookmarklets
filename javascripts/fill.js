@@ -4,6 +4,10 @@ function minify(js) {
     return 'javascript:(function()%7B' + encodeURIComponent(js.replace(/[\r\n\t]+/gm, ' ').replace(/\x20+/gm, ' ').trim()) + '%7D)()';
 }
 
+function normalize(s) {
+    return index[i].name.replaceAll(/[^a-zA-Z0-9\x21\$\x26\x27\(\)\*\+\x2c\x2d\.\/\x3a\x3b\x3d\?\x40_]/g, '-').replaceAll(/\x2d+/g, '-');
+}
+
 async function fillSection(section, path) {
     var content = [];
     console.debug('Fetching index');
@@ -17,13 +21,13 @@ async function fillSection(section, path) {
     toc.id = 'toc';
     var ttoc = document.createElement('h3');
     toc.appendChild(ttoc);
-    ttoc.textContent = 'Table of Content (' + index.length + ')';
+    ttoc.textContent = 'Examples (' + index.length + ')';
     var ul = document.createElement('ul');
     toc.appendChild(ul);
     for (let i = 0; i < index.length; i++) {
         var li = document.createElement('li');
         ul.appendChild(li);
-        li.innerHTML = '<a href="#' + encodeURIComponent(index[i].name.replaceAll(/[^a-zA-Z0-9\x21\$\x26\x27\(\)\*\+\x2c\x2d\.\/\x3a\x3b\x3d\?\x40_]/g, '-').replaceAll(/\x2d+/g, '-')) + '">' + index[i].name + '</a>';
+        li.innerHTML = '<a href="#' + encodeURIComponent(normalize(index[i].name)) + '</a>';
     }
     var loading = document.getElementById('loading');
     for (let i = 0; i < index.length; i++) {
@@ -38,7 +42,7 @@ async function fillSection(section, path) {
         var tlink = document.createElement('a');
         title.appendChild(tlink);
         tlink.className = 'name';
-        tlink.id = index[i].name.replaceAll(/[^a-zA-Z0-9\x21\$\x26\x27\(\)\*\+\x2c\x2d\.\/\x3a\x3b\x3d\?\x40_]/g, '-').replaceAll(/\x2d+/g, '-');
+        tlink.id = normalize(index[i].name);
         tlink.textContent = index[i].name;
         var desc = document.createElement('h4');
         bookmarklet.appendChild(desc);
@@ -66,6 +70,11 @@ async function fillSection(section, path) {
         var source = document.createElement('code');
         pre.appendChild(source);
         source.textContent = js.trim();
+        var edit = document.createElement('input');
+	bookmarklet.appendChild(edit);
+	edit.type = "button";
+	edit.value = "Edit it!"
+	edit.onclick = "location.href = '#editor';";
     }
     content.push(document.createElement('hr'));
     section.replaceChildren(...content);
