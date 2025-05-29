@@ -60,7 +60,7 @@ async function fillSection(section, path) {
         book.textContent = 'Bookmarklet';
         var instructions = document.createElement('p');
         bookmarklet.appendChild(instructions);
-        instructions.innerHTML = 'Drag and drop or bookmark this link: <a href="' + minify(js) + '>' + index[i].name + '</a>';
+        instructions.innerHTML = 'Drag and drop or bookmark this link: <a href="' + minify(js) + '">' + index[i].name + '</a>';
         var code = document.createElement('h4');
         bookmarklet.appendChild(code);
         code.textContent = 'Source code';
@@ -74,7 +74,7 @@ async function fillSection(section, path) {
 	bookmarklet.appendChild(edit);
 	edit.textContent = "Edit it!"
 	edit.onclick = function() { document.getElementById('plaintext').value = js; };
-	edit.href = "location.href = '#editor';";
+	edit.href = "#editor";
     }
     content.push(document.createElement('hr'));
     section.replaceChildren(...content);
