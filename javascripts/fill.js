@@ -1,5 +1,7 @@
 "use strict";
 
+/*jslint white */
+
 function minify(js) {
   return (
     "javascript:(function()%7B" +
