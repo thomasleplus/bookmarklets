@@ -77,7 +77,7 @@ async function fillSection(section, path) {
 	edit.onclick = function(a1, a2) {
 	    return function() {
 		document.getElementById('plaintext').value = a1;
-		document.getElementById('minilink').value = a2;
+		document.getElementById('mininame').value = a2;
 	    }
 	}(js, index[i].name);
     }
