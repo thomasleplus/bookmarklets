@@ -73,8 +73,13 @@ async function fillSection(section, path) {
         var edit = document.createElement('a');
 	bookmarklet.appendChild(edit);
 	edit.textContent = "Edit it!"
-	edit.onclick = function() { document.getElementById('plaintext').value = js; document.getElementById('minititle').value = index[i].name; };
 	edit.href = "#editor";
+	edit.onclick = function(a1, a2) {
+	    return function() {
+		document.getElementById('plaintext').value = a1;
+		document.getElementById('minilink').value = a2;
+	    }
+	}(js, index[i].name);
     }
     content.push(document.createElement('hr'));
     section.replaceChildren(...content);
