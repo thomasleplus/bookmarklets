@@ -76,8 +76,12 @@ async function fillSection(section, path) {
 	edit.href = "#editor";
 	edit.onclick = function(a1, a2) {
 	    return function() {
-		document.getElementById('plaintext').value(a1).trigger('input');
-		document.getElementById('mininame').value(a2).trigger('input');
+		var e1 = document.getElementById('plaintext');
+		e1.value = a1;
+		e1.trigger('input');
+		var e2 = document.getElementById('mininame');
+		e2.value = a2;
+		e2.trigger('input');
 	    }
 	}(js, index[i].name);
     }
