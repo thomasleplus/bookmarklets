@@ -78,10 +78,10 @@ async function fillSection(section, path) {
 	    return function() {
 		var e1 = document.getElementById('plaintext');
 		e1.value = a1;
-		e1.trigger('input');
+		e1.dispatchEvent(new Event('input'));
 		var e2 = document.getElementById('mininame');
 		e2.value = a2;
-		e2.trigger('input');
+		e2.dispatchEvent(new Event('input'));
 	    }
 	}(js, index[i].name);
     }
