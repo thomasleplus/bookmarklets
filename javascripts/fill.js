@@ -27,7 +27,7 @@ async function fillSection(section, path) {
     for (let i = 0; i < index.length; i++) {
         var li = document.createElement('li');
         ul.appendChild(li);
-        li.innerHTML = '<a href="#' + encodeURIComponent(normalize(index[i].name)) + '</a>';
+        li.innerHTML = '<a href="#' + encodeURIComponent(normalize(index[i].name)) + '">' + index[i].name + '</a>';
     }
     var loading = document.getElementById('loading');
     for (let i = 0; i < index.length; i++) {
@@ -70,11 +70,11 @@ async function fillSection(section, path) {
         var source = document.createElement('code');
         pre.appendChild(source);
         source.textContent = js.trim();
-        var edit = document.createElement('input');
+        var edit = document.createElement('a');
 	bookmarklet.appendChild(edit);
-	edit.type = "button";
-	edit.value = "Edit it!"
-	edit.onclick = "location.href = '#editor';";
+	edit.textContent = "Edit it!"
+	edit.onclick = function() { document.getElementById('plaintext').value = js; };
+	edit.href = "location.href = '#editor';";
     }
     content.push(document.createElement('hr'));
     section.replaceChildren(...content);
