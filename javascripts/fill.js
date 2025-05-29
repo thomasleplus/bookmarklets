@@ -55,7 +55,8 @@ async function init(path) {
   ttoc.textContent = "Examples (" + index.length + ")";
   var ul = document.createElement("ul");
   toc.appendChild(ul);
-  for (var i = 0; i < index.length; i++) {
+  var i;  
+  for (i = 0; i < index.length; i++) {
     var li = document.createElement("li");
     ul.appendChild(li);
     li.innerHTML =
@@ -66,10 +67,11 @@ async function init(path) {
       "</a>";
   }
   var loading = document.getElementById("loading");
-  for (var i = 0; i < index.length; i++) {
+  var j;
+  for (j = 0; j < index.length; j++) {
     loading.textContent += ".";
     content.push(document.createElement("hr"));
-    console.debug("Adding " + index[i].name);
+    console.debug("Adding " + index[j].name);
     var bookmarklet = document.createElement("section");
     content.push(bookmarklet);
     bookmarklet.className = "bookmarklet";
@@ -78,27 +80,27 @@ async function init(path) {
     var tlink = document.createElement("a");
     title.appendChild(tlink);
     tlink.className = "name";
-    tlink.id = normalize(index[i].name);
-    tlink.textContent = index[i].name;
+    tlink.id = normalize(index[j].name);
+    tlink.textContent = index[j].name;
     var desc = document.createElement("h4");
     bookmarklet.appendChild(desc);
     desc.textContent = "Description";
     var description = document.createElement("p");
     bookmarklet.appendChild(description);
-    description.textContent = index[i].description;
-    console.debug("Fetching source code for " + index[i].name);
+    description.textContent = index[j].description;
+    console.debug("Fetching source code for " + index[j].name);
     var js = await fetch(
       "https://raw.githubusercontent.com/" +
         path +
         "/main/javascripts/" +
-        encodeURIComponent(index[i].name) +
+        encodeURIComponent(index[j].name) +
         ".js"
     )
       .then(function (response) {
         return response.text();
       })
       .catch(console.error);
-    console.debug("Fetched source code for " + index[i].name);
+    console.debug("Fetched source code for " + index[j].name);
     var book = document.createElement("h4");
     bookmarklet.appendChild(book);
     book.textContent = "Bookmarklet";
@@ -108,7 +110,7 @@ async function init(path) {
       'Drag and drop or bookmark this link: <a href="' +
       minify(js) +
       '">' +
-      index[i].name +
+      index[j].name +
       "</a>";
     var code = document.createElement("h4");
     bookmarklet.appendChild(code);
@@ -132,7 +134,7 @@ async function init(path) {
         e2.value = a2;
         e2.dispatchEvent(new Event("input"));
       };
-    })(js, index[i].name);
+    })(js, index[j].name);
   }
   content.push(document.createElement("hr"));
   document.getElementById("bookmarklets").replaceChildren(...content);
