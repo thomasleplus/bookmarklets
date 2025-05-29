@@ -9,7 +9,7 @@ function minify(js) {
       js
         .replace(/[\r\n\t]+/gm, " ")
         .replace(/\x20+/gm, " ")
-        .trim(),
+        .trim()
     ) +
     "%7D)()"
   );
