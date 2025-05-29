@@ -26,6 +26,16 @@
     </div>
 
     <div class="container">
+      <section id="editor">
+        <h3>Editor</h3>
+	<h4>Source code</h4>
+	<pre class="highlight"><textarea id="plaintext" name="plaintext" onchange="document.getElementById('minified').value = minify(document.getElementById('plaintext').value);">"use strict";</textarea></pre>
+	<h4>Minified code</h4>
+	<pre class="highlight"><input type="text" id="minified" name="minified" readonly value="javascript:(function()%7B%22use%20strict%22%7D)()"></pre>
+      </section>
+    </div>
+
+    <div class="container">
       <section id="bookmarklets">
 	<hr/>
 	<div id="loading">Please wait while content is loading.</div>
