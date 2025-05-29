@@ -29,9 +29,9 @@
       <section id="editor">
         <h3>Editor</h3>
 	<h4>Source code</h4>
-	<pre class="highlight"><textarea id="plaintext" name="plaintext" onchange="document.getElementById('minified').value = minify(document.getElementById('plaintext').value);">"use strict";</textarea></pre>
+	<textarea class="container" style="height: 50em;" id="plaintext" name="plaintext" oninput="document.getElementById('minified').value = minify(document.getElementById('plaintext').value);">"use strict";</textarea>
 	<h4>Minified code</h4>
-	<pre class="highlight"><input type="text" id="minified" name="minified" readonly value="javascript:(function()%7B%22use%20strict%22%7D)()"></pre>
+	<input class="container" type="text" id="minified" name="minified" readonly value="javascript:(function()%7B%22use%20strict%22%7D)()">
       </section>
     </div>
 
