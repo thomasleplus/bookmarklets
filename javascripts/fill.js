@@ -1,6 +1,6 @@
 "use strict";
 
-/*jslint white:false */
+/*jslint white:true */
 
 function minify(js) {
   return (
