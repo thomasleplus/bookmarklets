@@ -24,14 +24,16 @@
         {{ content }}
       </section>
     </div>
-
+    
+    <hr>
+    
     <div class="container">
       <section id="editor">
         <h3>Editor</h3>
 	<h4>Source code</h4>
-	<textarea class="container" style="height: 50em;" id="plaintext" name="plaintext" oninput="document.getElementById('minified').value = minify(document.getElementById('plaintext').value);">"use strict";</textarea>
+	<textarea class="container" style="height: 20em; background: rgba(0,0,0,0.9); border: 1px solid rgba(255,255,255,0.15); padding: 10px; font-size: 16px; color: #b5e853; border-radius: 2px; word-wrap: normal; overflow: auto; overflow-y: hidden;" id="plaintext" name="plaintext" oninput="document.getElementById('minified').value = minify(document.getElementById('plaintext').value);">"use strict";</textarea>
 	<h4>Minified code</h4>
-	<input class="container" type="text" id="minified" name="minified" readonly value="javascript:(function()%7B%22use%20strict%22%7D)()">
+	<input class="container" style="background: rgba(0,0,0,0.9); border: 1px solid rgba(255,255,255,0.15); padding: 10px; font-size: 16px; color: #b5e853; border-radius: 2px; word-wrap: normal; overflow: auto; overflow-y: hidden;" type="text" id="minified" name="minified" readonly value="javascript:(function()%7B%22use%20strict%22%7D)()">
       </section>
     </div>
 
