@@ -1,0 +1,20 @@
+---
+name: Question
+description: Ask a question.
+title: "[Question] "
+labels:
+  - question
+assignees:
+  - thomasleplus
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this feature request!
+  - type: textarea
+    attributes:
+      label: What is your question?
+      description: Please include as many details and examples as possible.
+      render: markdown
+    validations:
+      required: true
