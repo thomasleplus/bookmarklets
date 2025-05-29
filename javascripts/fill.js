@@ -1,6 +1,6 @@
 "use strict";
 
-/*jslint white:true, loopfunc:true, loopvar:true */
+/*jslint white:true */
 
 function minify(js) {
   return (
