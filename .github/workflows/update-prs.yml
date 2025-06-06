@@ -4,7 +4,7 @@ name: Update PRs
 on:
   push:
   schedule:
-    - cron: "0 * * * *"
+    - cron: "0 0 * * *"
   workflow_dispatch:
 
 permissions:
