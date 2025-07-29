@@ -19,6 +19,8 @@ request. We then kindly ask that:
 - all code changes must be tested manually and automated tests should
   be included when possible.
 - all necessary documentation should be included as well.
+- commit messages must follow the [conventional commits specification](https://www.conventionalcommits.org).
+  See commit history for examples.
 - commits on a single pull request must be squashed together to keep
   make reviews easier.
 - commits must be signed (this is supported by most Git clients as
