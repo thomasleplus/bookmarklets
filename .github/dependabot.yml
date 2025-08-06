@@ -8,4 +8,4 @@ updates:
     cooldown:
       default-days: 7
     commit-message:
-      prefix: chore(ci-deps)
+      prefix: ci(deps)
