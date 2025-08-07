@@ -12,12 +12,6 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.actor == 'dependabot[bot]' }}
     steps:
-      - name: Authenticate CLI with a PAT
-        env:
-          RELEASE_TOKEN: ${{ secrets.RELEASE_TOKEN }}
-        if: env.RELEASE_TOKEN != ''
-        shell: bash
-        run: echo "${RELEASE_TOKEN}" | gh auth login --with-token
       - name: Enable auto-merge for Dependabot PRs
         shell: bash
         run: |
