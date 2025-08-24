@@ -17,15 +17,9 @@ jobs:
     steps:
       - name: Check out
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-      - name: Install YAMLLint
-        shell: bash
-        run: |
-          pip install yamllint==1.37.1
-          msg="$(pip list --outdated | grep -e yamllint || true)"
-          if [ -n "${msg}" ]; then
-            >&2 echo "ERROR: outdated: ${msg}"
-            exit 1
-          fi
       - name: Run YAMLLint
         shell: bash
-        run: "yamllint -d '{extends: default, rules: {line-length: disable}}' ."
+        run: |
+          set -euo pipefail
+          IFS=$'\n\t'
+          yamllint -d '{extends: default, rules: {line-length: disable}}' .
