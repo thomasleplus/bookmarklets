@@ -22,8 +22,8 @@ jobs:
         run: |
           set -euo pipefail
           IFS=$'\n\t'
-          npm install -g jslint@0.12.1
-          if npm outdated --global | tee -a /dev/stderr | grep -q -e .; then
+          sudo npm install -g jslint@0.12.1
+          if sudo npm outdated --global | tee -a /dev/stderr | grep -q -e .; then
             exit 1
           fi
       - name: Run JSLint
