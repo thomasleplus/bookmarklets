@@ -1,2 +1,7 @@
 "use strict";
-window.open('https://who.is/whois/' + encodeURIComponent(location.hostname), '_blank').focus();
+window
+  .open(
+    "https://who.is/whois/" + encodeURIComponent(location.hostname),
+    "_blank",
+  )
+  .focus();
