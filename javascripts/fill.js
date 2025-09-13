@@ -24,6 +24,7 @@ function normalize(s) {
     .replaceAll(/\x2d+/g, "-");
 }
 
+// init() is used in HTML
 // eslint-disable-next-line no-unused-vars
 async function init(path) {
   document.getElementById("mininame").oninput = function () {
