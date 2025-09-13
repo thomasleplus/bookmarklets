@@ -9,7 +9,7 @@ function minify(js) {
       js
         .replace(/[\r\n\t]+/gm, " ")
         .replace(/\x20+/gm, " ")
-        .trim()
+        .trim(),
     ) +
     "%7D)()"
   );
@@ -18,12 +18,13 @@ function minify(js) {
 function normalize(s) {
   return s
     .replaceAll(
-      /[^a-zA-Z0-9\x21\$\x26\x27\(\)\*\+\x2c\x2d\.\/\x3a\x3b\x3d\?\x40_]/g,
-      "-"
+      /[^a-zA-Z0-9\x21$\x26\x27()*+\x2c\x2d./\x3a\x3b\x3d?\x40_]/g,
+      "-",
     )
     .replaceAll(/\x2d+/g, "-");
 }
 
+// eslint-disable-next-line no-unused-vars
 async function init(path) {
   document.getElementById("mininame").oninput = function () {
     document.getElementById("minified").textContent =
@@ -31,7 +32,7 @@ async function init(path) {
   };
   document.getElementById("plaintext").oninput = function () {
     document.getElementById("minified").href = minify(
-      document.getElementById("plaintext").value
+      document.getElementById("plaintext").value,
     );
   };
   var content = [];
@@ -39,7 +40,7 @@ async function init(path) {
   var index = await fetch(
     "https://raw.githubusercontent.com/" +
       path +
-      "/main/javascripts/index.json"
+      "/main/javascripts/index.json",
   )
     .then(function (response) {
       return response.json();
@@ -55,7 +56,7 @@ async function init(path) {
   ttoc.textContent = "Examples (" + index.length + ")";
   var ul = document.createElement("ul");
   toc.appendChild(ul);
-  var i;  
+  var i;
   for (i = 0; i < index.length; i++) {
     var li = document.createElement("li");
     ul.appendChild(li);
@@ -94,7 +95,7 @@ async function init(path) {
         path +
         "/main/javascripts/" +
         encodeURIComponent(index[j].name) +
-        ".js"
+        ".js",
     )
       .then(function (response) {
         return response.text();
