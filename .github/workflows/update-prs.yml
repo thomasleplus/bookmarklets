@@ -12,7 +12,7 @@ permissions:
   contents: write
 
 jobs:
-  update:
+  update-prs:
     if: startsWith(github.ref, 'refs/heads/')
     runs-on: ubuntu-latest
     steps:
