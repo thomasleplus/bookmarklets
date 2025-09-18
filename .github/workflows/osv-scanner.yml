@@ -30,5 +30,5 @@ permissions:
   actions: read
 
 jobs:
-  scan:
+  osv-scanner:
     uses: "google/osv-scanner-action/.github/workflows/osv-scanner-reusable.yml@90b209d0ea55cea1da9fc0c4e65782cc6acb6e2e" # v2.2.2
