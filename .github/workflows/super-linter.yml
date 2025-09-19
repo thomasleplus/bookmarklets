@@ -66,4 +66,6 @@ jobs:
           LINTER_RULES_PATH: .
           DEFAULT_BRANCH: main
           ENFORCE_COMMITLINT_CONFIGURATION_CHECK: true
+          GITHUB_ACTIONS_ZIZMOR_CONFIG_FILE: .zizmor.yml
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

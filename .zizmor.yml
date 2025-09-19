@@ -1,0 +1,14 @@
+---
+rules:
+  forbidden-uses:
+    config:
+      allow:
+        - actions/*
+        - docker/*
+        - github/codeql-action/*
+        - google/osv-scanner-action/*
+        - microsoft/DevSkim-Action
+        - microsoft/security-devops-action
+        - ossf/scorecard-action
+        - sigstore/cosign-installer
+        - super-linter/super-linter
