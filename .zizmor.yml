@@ -3,12 +3,15 @@ rules:
   forbidden-uses:
     config:
       allow:
+        - Azure/*
         - actions/*
+        - aws-actions/*
         - docker/*
-        - github/codeql-action/*
-        - google/osv-scanner-action/*
-        - microsoft/DevSkim-Action
-        - microsoft/security-devops-action
-        - ossf/scorecard-action
-        - sigstore/cosign-installer
+        - github/*
+        - google-github-actions/*
+        - google/*
+        - googleapis/*
+        - microsoft/*
+        - ossf/*
+        - sigstore/*
         - super-linter/super-linter
