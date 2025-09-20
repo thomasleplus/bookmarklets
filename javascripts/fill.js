@@ -139,5 +139,5 @@ async function init(path) {
     })(js, index[j].name);
   }
   content.push(document.createElement("hr"));
-  document.getElementById("bookmarklets").replaceChildren(...content);
+  document.getElementById("bookmarklets-list").replaceChildren(...content);
 }
