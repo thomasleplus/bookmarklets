@@ -37,8 +37,11 @@ jobs:
     # Grant status permission for MULTI_STATUS #
     ############################################
     permissions:
+      # Required to read the code
       contents: read
+      # Required to access the container image
       packages: read
+      # Required to write the status
       statuses: write
 
     ##################

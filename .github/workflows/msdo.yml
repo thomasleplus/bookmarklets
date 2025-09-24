@@ -21,17 +21,16 @@ jobs:
     name: MSDO
     runs-on: windows-latest
     permissions:
+      # Required to upload the SARIF file to the security tab
       security-events: write
     steps:
       - name: Checkout code
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
         with:
           persist-credentials: false
-
       - name: Run Microsoft Security DevOps scanner
         uses: microsoft/security-devops-action@08976cb623803b1b36d7112d4ff9f59eae704de0 # v1.12.0
         id: msdo
-
       - name: Upload MSDO scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@192325c86100d080feab897ff886c34abd4c83a3 # v3.29.5
         with:

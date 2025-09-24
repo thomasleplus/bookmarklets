@@ -21,14 +21,15 @@ on:
     - cron: "0 0 * * 0"
   workflow_dispatch:
 
-permissions:
-  # Require writing security events to upload SARIF file to security tab
-  security-events: write
-  # Read commit contents
-  contents: read
-  # Actions read-only
-  actions: read
+permissions: {}
 
 jobs:
   osv-scanner:
+    permissions:
+      # Required to upload the SARIF file to the security tab
+      security-events: write
+      # Required to read the code
+      contents: read
+      # Required to read the code
+      actions: read
     uses: "google/osv-scanner-action/.github/workflows/osv-scanner-reusable.yml@90b209d0ea55cea1da9fc0c4e65782cc6acb6e2e" # v2.2.2

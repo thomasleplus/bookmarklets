@@ -7,13 +7,16 @@ on:
     - cron: "0 0 * * *"
   workflow_dispatch:
 
-permissions:
-  pull-requests: write
-  contents: write
+permissions: {}
 
 jobs:
   update-prs:
     if: startsWith(github.ref, 'refs/heads/')
+    permissions:
+      # Required to update the PR
+      pull-requests: write
+      # Required to update the PR branch
+      contents: write
     runs-on: ubuntu-latest
     steps:
       - name: Update Pull Requests

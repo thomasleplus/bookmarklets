@@ -9,15 +9,21 @@ on:
     - cron: "0 0 * * 0"
   workflow_dispatch:
 
-permissions: read-all
+permissions: {}
 
 jobs:
   scorecards:
     name: Scorecards analysis
     runs-on: ubuntu-latest
     permissions:
-      security-events: write
+      # Required to read the code
+      actions: read
+      # Required to read the code
+      contents: read
+      # Required to sign the SARIF file
       id-token: write
+      # Required to upload the SARIF file to the security tab
+      security-events: write
     steps:
       - name: "Checkout code"
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0

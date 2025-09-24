@@ -2,13 +2,17 @@
 name: "Dependabot auto-merge"
 on: pull_request
 
-permissions:
-  actions: write
-  contents: write
-  pull-requests: write
+permissions: {}
 
 jobs:
   automerge:
+    permissions:
+      # Required to merge the PR
+      contents: write
+      # Required to merge the PR if it modifies a workflow
+      actions: write
+      # Required to approve the PR
+      pull-requests: write
     runs-on: ubuntu-latest
     if: ${{ github.event.pull_request.user.login == 'dependabot[bot]' }}
     steps:
