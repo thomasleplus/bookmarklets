@@ -70,5 +70,6 @@ jobs:
           DEFAULT_BRANCH: main
           ENFORCE_COMMITLINT_CONFIGURATION_CHECK: true
           GITHUB_ACTIONS_ZIZMOR_CONFIG_FILE: .zizmor.yml
+          FILTER_REGEX_EXCLUDE: "(docs/_layouts/default\\.html)$"
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

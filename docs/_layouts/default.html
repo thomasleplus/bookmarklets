@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: "en-US" }}">
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+    <script src="{{ '/javascripts/fill.js' | relative_url }}"></script>
+
+{% seo %}
+  </head>
+
+  <body onload="init('{{site.github.repository_nwo}}');">
+
+    <header>
+      <div class="container">
+        <h1>{{ site.title | default: site.github.repository_name }}</h1>
+        <h2>{{ site.description | default: site.github.project_tagline }}</h2>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        {{ content }}
+      </section>
+    </div>
+    
+    <div class="container">
+      <section id="editor">
+        <hr>
+        <h3>Playground</h3>
+	Modify the name and the source code below and the bookmarklet
+	in the "Result" section will update to reflect it in real-time.
+	<h4 style="margin-top: 10px;">Name</h4>
+	<input class="container" style="background: rgba(0,0,0,0.9); border: 1px solid rgba(255,255,255,0.15); padding: 10px; font-size: 16px; color: #d0d0d0; border-radius: 2px; word-wrap: normal; overflow: scroll;" type="text" id="mininame" name="mininame" value="Hello, world!">
+	<h4 style="margin-top: 10px;">Source code</h4>
+	<textarea class="container" style="height: 20em; background: rgba(0,0,0,0.9); border: 1px solid rgba(255,255,255,0.15); padding: 10px; font-size: 16px; color: #d0d0d0; border-radius: 2px; word-wrap: normal; overflow: scroll;" id="plaintext" name="plaintext">"use strict";&#013;&#010;alert('Hello, world!');</textarea>
+	<h4 style="margin-top: 10px;">Result</h4>
+        <a id="minified" href="javascript:(function()%7B%22use%20strict%22%3B%20alert('Hello%2C%20world!')%3B%7D)()">Hello, world!</a>
+      </section>
+    </div>
+
+    <div class="container">
+      <section id="bookmarklets-list">
+	<hr/>
+	<div id="loading">Please wait while content is loading.</div>
+	<hr/>
+      </section>
+    </div>
+    
+    <footer>
+      <div class="container">
+        <section id="downloads">
+          {% if site.show_downloads %}
+            <a href="{{ site.github.zip_url }}" class="btn">Download as .zip</a>
+            <a href="{{ site.github.tar_url }}" class="btn">Download as .tar.gz</a>
+          {% endif %}
+          <a href="{{ site.github.repository_url }}" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+        <section id="copyright">
+          Copyright &copy; 2019-{{ site.time | date: '%Y' }} <a href="https://www.leplus.org" target="_blank">Thomas Leplus</a>.
+        </section>
+        <section id="license">
+          Unless otherwise noted, the content of this site is licensed under <a href="{{site.github.license.url}}" target="_blank">{{site.github.license.name}}</a>.
+        </section>
+      </div>
+    </footer>
+    
+  </body>
+</html>
