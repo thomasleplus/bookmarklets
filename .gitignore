@@ -60,5 +60,29 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+# Infrastructure
+# =========================
+
+# AWS
+.aws/
+
+# Azure
+.azure/
+
+# Docker
+.docker/
+
+# Git
+.git-credentials
+
+# Kubernetes
+.kube/
+
+# SSH
+.ssh/
+
+# Remote Desktop
+*.rdp
+
 # SARIF files
 *.sarif
