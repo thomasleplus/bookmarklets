@@ -69,6 +69,7 @@ jobs:
           LINTER_RULES_PATH: .
           DEFAULT_BRANCH: main
           ENFORCE_COMMITLINT_CONFIGURATION_CHECK: true
+          TRIVY_SCANNERS: ${{ (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch') && 'vuln,misconfig,secret' || 'misconfig,secret'}}
           BIOME_CONFIG_PATH: .biome.json
           GITHUB_ACTIONS_ZIZMOR_CONFIG_FILE: .zizmor.yml
           FILTER_REGEX_EXCLUDE: "(docs/_layouts/default\\.html)$"
