@@ -1,6 +1,6 @@
 "use strict";
-var pieces = location.href.split("/");
-var i, piece, coordinates;
+const pieces = location.href.split("/");
+let i, piece, coordinates;
 for (i = 0; i < pieces.length; i += 1) {
   piece = pieces[i];
   if (piece.startsWith("@")) {
@@ -12,7 +12,7 @@ for (i = 0; i < pieces.length; i += 1) {
 if (coordinates === undefined || coordinates === null) {
   window.alert("Current Google Maps URL does not contain coordinates.");
 } else {
-  let now = new Date();
+  const now = new Date();
   window
     .open(
       "https://www.suncalc.org/#/" +

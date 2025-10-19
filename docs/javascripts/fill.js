@@ -36,9 +36,9 @@ async function init(path) {
       document.getElementById("plaintext").value,
     );
   };
-  var content = [];
+  const content = [];
   console.debug("Fetching index");
-  var index = await fetch(
+  const index = await fetch(
     "https://raw.githubusercontent.com/" +
       path +
       "/main/javascripts/index.json",
@@ -49,17 +49,17 @@ async function init(path) {
     .catch(console.error);
   console.debug("Fetched index");
   content.push(document.createElement("hr"));
-  var toc = document.createElement("section");
+  const toc = document.createElement("section");
   content.push(toc);
   toc.id = "toc";
-  var ttoc = document.createElement("h3");
+  const ttoc = document.createElement("h3");
   toc.appendChild(ttoc);
   ttoc.textContent = "Examples (" + index.length + ")";
-  var ul = document.createElement("ul");
+  const ul = document.createElement("ul");
   toc.appendChild(ul);
-  var i;
+  let i;
   for (i = 0; i < index.length; i++) {
-    var li = document.createElement("li");
+    const li = document.createElement("li");
     ul.appendChild(li);
     li.innerHTML =
       '<a href="#' +
@@ -68,30 +68,30 @@ async function init(path) {
       index[i].name +
       "</a>";
   }
-  var loading = document.getElementById("loading");
-  var j;
+  const loading = document.getElementById("loading");
+  let j;
   for (j = 0; j < index.length; j++) {
     loading.textContent += ".";
     content.push(document.createElement("hr"));
     console.debug("Adding " + index[j].name);
-    var bookmarklet = document.createElement("section");
+    const bookmarklet = document.createElement("section");
     content.push(bookmarklet);
     bookmarklet.className = "bookmarklet";
-    var title = document.createElement("h3");
+    const title = document.createElement("h3");
     bookmarklet.appendChild(title);
-    var tlink = document.createElement("a");
+    const tlink = document.createElement("a");
     title.appendChild(tlink);
     tlink.className = "name";
     tlink.id = normalize(index[j].name);
     tlink.textContent = index[j].name;
-    var desc = document.createElement("h4");
+    const desc = document.createElement("h4");
     bookmarklet.appendChild(desc);
     desc.textContent = "Description";
-    var description = document.createElement("p");
+    const description = document.createElement("p");
     bookmarklet.appendChild(description);
     description.textContent = index[j].description;
     console.debug("Fetching source code for " + index[j].name);
-    var js = await fetch(
+    const js = await fetch(
       "https://raw.githubusercontent.com/" +
         path +
         "/main/javascripts/" +
@@ -103,10 +103,10 @@ async function init(path) {
       })
       .catch(console.error);
     console.debug("Fetched source code for " + index[j].name);
-    var book = document.createElement("h4");
+    const book = document.createElement("h4");
     bookmarklet.appendChild(book);
     book.textContent = "Bookmarklet";
-    var instructions = document.createElement("p");
+    const instructions = document.createElement("p");
     bookmarklet.appendChild(instructions);
     instructions.innerHTML =
       'Drag and drop or bookmark this link: <a href="' +
@@ -114,25 +114,25 @@ async function init(path) {
       '">' +
       index[j].name +
       "</a>";
-    var code = document.createElement("h4");
+    const code = document.createElement("h4");
     bookmarklet.appendChild(code);
     code.textContent = "Source code";
-    var pre = document.createElement("pre");
+    const pre = document.createElement("pre");
     bookmarklet.appendChild(pre);
     pre.className = "highlight";
-    var source = document.createElement("code");
+    const source = document.createElement("code");
     pre.appendChild(source);
     source.textContent = js.trim();
-    var edit = document.createElement("a");
+    const edit = document.createElement("a");
     bookmarklet.appendChild(edit);
     edit.textContent = "Edit it!";
     edit.href = "#editor";
     edit.onclick = (function (a1, a2) {
       return function () {
-        var e1 = document.getElementById("plaintext");
+        const e1 = document.getElementById("plaintext");
         e1.value = a1;
         e1.dispatchEvent(new Event("input"));
-        var e2 = document.getElementById("mininame");
+        const e2 = document.getElementById("mininame");
         e2.value = a2;
         e2.dispatchEvent(new Event("input"));
       };

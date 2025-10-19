@@ -1,6 +1,6 @@
 "use strict";
-var i, anchor, id;
-var anchors = document.getElementsByTagName("a");
+let i, anchor, id;
+const anchors = document.getElementsByTagName("a");
 for (i = 0; i < anchors.length; i += 1) {
   anchor = anchors[i];
   id = anchor.id;

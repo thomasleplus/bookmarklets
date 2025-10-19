@@ -1,6 +1,6 @@
 "use strict";
-var selection;
-var h = {
+let selection;
+const h = {
   0: "Zero",
   1: "One",
   2: "Two",

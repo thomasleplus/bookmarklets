@@ -1,7 +1,7 @@
 "use strict";
-var msg = "";
-var links = document.getElementsByTagName("link");
-var i, link;
+let msg = "";
+const links = document.getElementsByTagName("link");
+let i, link;
 for (i = 0; i < links.length; i += 1) {
   link = links[i];
   if (
