@@ -25,7 +25,7 @@ function normalize(s) {
 // biome-ignore-start lint/correctness/noUnusedVariables: init() is used in HTML
 // eslint-disable-next-line no-unused-vars
 async function init(path) {
-// biome-ignore-end lint/correctness/noUnusedVariables: init() is used in HTML
+  // biome-ignore-end lint/correctness/noUnusedVariables: init() is used in HTML
   document.getElementById("mininame").oninput = () => {
     document.getElementById("minified").textContent =
       document.getElementById("mininame").value;
