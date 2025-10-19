@@ -22,8 +22,10 @@ function normalize(s) {
     .replaceAll(/\x2d+/g, "-");
 }
 
-// biome-ignore lint/correctness/noUnusedVariables: init() is used in HTML // eslint-disable-next-line no-unused-vars 
+// biome-ignore-start lint/correctness/noUnusedVariables: init() is used in HTML
+// eslint-disable-next-line no-unused-vars
 async function init(path) {
+// biome-ignore-end lint/correctness/noUnusedVariables: init() is used in HTML
   document.getElementById("mininame").oninput = () => {
     document.getElementById("minified").textContent =
       document.getElementById("mininame").value;
@@ -121,13 +123,13 @@ async function init(path) {
     edit.textContent = "Edit it!";
     edit.href = "#editor";
     edit.onclick = ((a1, a2) => () => {
-        const e1 = document.getElementById("plaintext");
-        e1.value = a1;
-        e1.dispatchEvent(new Event("input"));
-        const e2 = document.getElementById("mininame");
-        e2.value = a2;
-        e2.dispatchEvent(new Event("input"));
-      })(js, index[j].name);
+      const e1 = document.getElementById("plaintext");
+      e1.value = a1;
+      e1.dispatchEvent(new Event("input"));
+      const e2 = document.getElementById("mininame");
+      e2.value = a2;
+      e2.dispatchEvent(new Event("input"));
+    })(js, index[j].name);
   }
   content.push(document.createElement("hr"));
   document.getElementById("bookmarklets-list").replaceChildren(...content);
