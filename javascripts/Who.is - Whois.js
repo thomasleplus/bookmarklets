@@ -1,4 +1,3 @@
-"use strict";
 window
   .open(
     "https://who.is/whois/" + encodeURIComponent(location.hostname),

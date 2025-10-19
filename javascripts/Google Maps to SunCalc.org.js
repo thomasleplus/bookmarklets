@@ -1,4 +1,3 @@
-"use strict";
 const pieces = location.href.split("/");
 let i, piece, coordinates;
 for (i = 0; i < pieces.length; i += 1) {

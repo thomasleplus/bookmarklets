@@ -1,4 +1,3 @@
-"use strict";
 let selection;
 if (window.getSelection) {
   selection = window.getSelection().toString();

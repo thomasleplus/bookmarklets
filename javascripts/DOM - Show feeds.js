@@ -1,4 +1,3 @@
-"use strict";
 let msg = "";
 const links = document.getElementsByTagName("link");
 let i, link;

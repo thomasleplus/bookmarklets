@@ -1,4 +1,3 @@
-"use strict";
 window
   .open(
     "https://www.google.com/search?q=related%3A" +

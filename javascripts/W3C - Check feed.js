@@ -1,4 +1,3 @@
-"use strict";
 window
   .open(
     "https://validator.w3.org/feed/check.cgi?url=" +

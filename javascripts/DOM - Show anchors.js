@@ -1,4 +1,3 @@
-"use strict";
 let i, anchor, id;
 const anchors = document.getElementsByTagName("a");
 for (i = 0; i < anchors.length; i += 1) {

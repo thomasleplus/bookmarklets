@@ -1,4 +1,3 @@
-"use strict";
 let selection;
 const h = {
   0: "Zero",

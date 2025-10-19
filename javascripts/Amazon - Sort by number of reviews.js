@@ -1,4 +1,3 @@
-"use strict";
 const url = new URL(location.href);
 const params = new URLSearchParams(url.search);
 if (!params.get("rh") && !params.get("i")) {

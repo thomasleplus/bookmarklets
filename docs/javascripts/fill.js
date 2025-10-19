@@ -1,10 +1,8 @@
-"use strict";
-
 /*jslint white:true */
 
 function minify(js) {
   return (
-    "javascript:(function()%7B" +
+    "javascript:(function()%7B%22use%20strict%22%3B%20" +
     encodeURIComponent(
       js
         .replace(/[\r\n\t]+/gm, " ")
@@ -24,14 +22,13 @@ function normalize(s) {
     .replaceAll(/\x2d+/g, "-");
 }
 
-// init() is used in HTML
-// eslint-disable-next-line no-unused-vars
+// biome-ignore lint/correctness/noUnusedVariables: init() is used in HTML // eslint-disable-next-line no-unused-vars 
 async function init(path) {
-  document.getElementById("mininame").oninput = function () {
+  document.getElementById("mininame").oninput = () => {
     document.getElementById("minified").textContent =
       document.getElementById("mininame").value;
   };
-  document.getElementById("plaintext").oninput = function () {
+  document.getElementById("plaintext").oninput = () => {
     document.getElementById("minified").href = minify(
       document.getElementById("plaintext").value,
     );
@@ -43,9 +40,7 @@ async function init(path) {
       path +
       "/main/javascripts/index.json",
   )
-    .then(function (response) {
-      return response.json();
-    })
+    .then((response) => response.json())
     .catch(console.error);
   console.debug("Fetched index");
   content.push(document.createElement("hr"));
@@ -98,9 +93,7 @@ async function init(path) {
         encodeURIComponent(index[j].name) +
         ".js",
     )
-      .then(function (response) {
-        return response.text();
-      })
+      .then((response) => response.text())
       .catch(console.error);
     console.debug("Fetched source code for " + index[j].name);
     const book = document.createElement("h4");
@@ -127,16 +120,14 @@ async function init(path) {
     bookmarklet.appendChild(edit);
     edit.textContent = "Edit it!";
     edit.href = "#editor";
-    edit.onclick = (function (a1, a2) {
-      return function () {
+    edit.onclick = ((a1, a2) => () => {
         const e1 = document.getElementById("plaintext");
         e1.value = a1;
         e1.dispatchEvent(new Event("input"));
         const e2 = document.getElementById("mininame");
         e2.value = a2;
         e2.dispatchEvent(new Event("input"));
-      };
-    })(js, index[j].name);
+      })(js, index[j].name);
   }
   content.push(document.createElement("hr"));
   document.getElementById("bookmarklets-list").replaceChildren(...content);

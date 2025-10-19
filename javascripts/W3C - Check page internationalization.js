@@ -1,4 +1,3 @@
-"use strict";
 window
   .open(
     "https://validator.w3.org/i18n-checker/check?uri=" +

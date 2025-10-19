@@ -1,4 +1,3 @@
-"use strict";
 window
   .open(
     "https://whois.domaintools.com/" + encodeURIComponent(location.hostname),
