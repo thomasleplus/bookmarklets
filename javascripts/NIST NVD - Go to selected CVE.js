@@ -9,7 +9,7 @@ if (selection === undefined || selection.length === 0) {
   window.alert("Select the desired text.");
 } else {
   selection = selection.trim();
-  var url;
+  let url;
   if (selection.match(/^cve-\d+-\d+$/i)) {
     url = "https://nvd.nist.gov/vuln/detail/" + selection;
   } else if (selection.match(/^\d+-\d+$/)) {

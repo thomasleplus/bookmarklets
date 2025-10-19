@@ -47,8 +47,8 @@ if (selection === undefined || selection.length === 0) {
   window.alert("Select the desired text.");
 } else {
   selection = selection.trim();
-  var result = "";
-  var i, c, d, t;
+  let result = "";
+  let i, c, d, t;
   for (i = 0; i < selection.length; i += 1) {
     c = selection.charAt(i);
     d = encodeURIComponent(c);

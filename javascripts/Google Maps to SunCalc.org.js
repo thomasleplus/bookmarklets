@@ -12,7 +12,7 @@ for (i = 0; i < pieces.length; i += 1) {
 if (coordinates === undefined || coordinates === null) {
   window.alert("Current Google Maps URL does not contain coordinates.");
 } else {
-  var now = new Date();
+  let now = new Date();
   window
     .open(
       "https://www.suncalc.org/#/" +
