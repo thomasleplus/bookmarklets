@@ -28,6 +28,7 @@ jobs:
       - name: "Checkout code"
         uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
         with:
+          fetch-depth: 1
           persist-credentials: false
       - name: "Run analysis"
         uses: ossf/scorecard-action@4eaacf0543bb3f2c246792bd56e8cdeffafb205a # v2.4.3
