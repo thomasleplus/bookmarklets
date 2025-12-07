@@ -1,5 +1,8 @@
 {
   "$schema": "https://biomejs.dev/schemas/2.2.4/schema.json",
+  "files": {
+    "includes": ["**", "!**/docs/_layouts/default.html"]
+  },
   "formatter": {
     "indentStyle": "space",
     "indentWidth": 2
