@@ -9,7 +9,7 @@ if (selection === undefined || selection.length === 0) {
 } else {
   window
     .open(
-      "https://www.imdb.com/find/?q=" + encodeURIComponent(selection.trim()),
+      `https://www.imdb.com/find/?q=${encodeURIComponent(selection.trim())}`,
       "_blank",
     )
     .focus();

@@ -51,7 +51,7 @@ async function init(path) {
   toc.id = "toc";
   const ttoc = document.createElement("h3");
   toc.appendChild(ttoc);
-  ttoc.textContent = "Examples (" + index.length + ")";
+  ttoc.textContent = `Examples·(${index.length})`;
   const ul = document.createElement("ul");
   toc.appendChild(ul);
   let i;
@@ -70,7 +70,7 @@ async function init(path) {
   for (j = 0; j < index.length; j++) {
     loading.textContent += ".";
     content.push(document.createElement("hr"));
-    console.debug("Adding " + index[j].name);
+    console.debug(`Adding·${index[j].name}`);
     const bookmarklet = document.createElement("section");
     content.push(bookmarklet);
     bookmarklet.className = "bookmarklet";
@@ -87,7 +87,7 @@ async function init(path) {
     const description = document.createElement("p");
     bookmarklet.appendChild(description);
     description.textContent = index[j].description;
-    console.debug("Fetching source code for " + index[j].name);
+    console.debug(`Fetching·source·code·for·${index[j].name}`);
     const js = await fetch(
       "https://raw.githubusercontent.com/" +
         path +
@@ -97,7 +97,7 @@ async function init(path) {
     )
       .then((response) => response.text())
       .catch(console.error);
-    console.debug("Fetched source code for " + index[j].name);
+    console.debug(`Fetched·source·code·for·${index[j].name}`);
     const book = document.createElement("h4");
     bookmarklet.appendChild(book);
     book.textContent = "Bookmarklet";

@@ -9,7 +9,7 @@ if (selection === undefined || selection.length === 0) {
 } else {
   window
     .open(
-      "https://www.bing.com/search?q=" + encodeURIComponent(selection.trim()),
+      `https://www.bing.com/search?q=${encodeURIComponent(selection.trim())}`,
       "_blank",
     )
     .focus();

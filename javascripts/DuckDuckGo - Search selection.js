@@ -9,7 +9,7 @@ if (selection === undefined || selection.length === 0) {
 } else {
   window
     .open(
-      "https://duckduckgo.com/?q=" + encodeURIComponent(selection.trim()),
+      `https://duckduckgo.com/?q=${encodeURIComponent(selection.trim())}`,
       "_blank",
     )
     .focus();

@@ -9,7 +9,7 @@ if (selection === undefined || selection.length === 0) {
 } else {
   window
     .open(
-      "https://www.amazon.com/s?k=" + encodeURIComponent(selection.trim()),
+      `https://www.amazon.com/s?k=${encodeURIComponent(selection.trim())}`,
       "_blank",
     )
     .focus();

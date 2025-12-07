@@ -57,12 +57,12 @@ if (selection === undefined || selection.length === 0) {
     if (d === undefined) {
       t = h[c.toUpperCase()];
       if (t === undefined) {
-        d = "%" + c.codePointAt(0).toString(16).toUpperCase();
+        d = `%${c.codePointAt(0).toString(16).toUpperCase()}`;
       } else {
         d = t.toLowerCase();
       }
     }
-    result += d + " ";
+    result += `${d} `;
   }
   window.alert(result);
 }

@@ -4,7 +4,7 @@ for (i = 0; i < pieces.length; i += 1) {
   piece = pieces[i];
   if (piece.startsWith("@")) {
     piece = piece.substring(1).split(",");
-    coordinates = piece[0] + "," + piece[1] + ",19";
+    coordinates = `${piece[0]},${piece[1]},19`;
     break;
   }
 }
