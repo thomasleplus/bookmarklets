@@ -17,7 +17,7 @@
   },
   {
     "name": "DOM - Allow copy paste",
-      "description": "This bookmarklet reenables copy/paste, selection, right-click, etc. on all elements in the page (typically a text field or text area)."
+    "description": "This bookmarklet reenables copy/paste, selection, right-click, etc. on all elements in the page (typically a text field or text area)."
   },
   {
     "name": "DOM - Allow save password",
