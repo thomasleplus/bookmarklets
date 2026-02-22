@@ -14,9 +14,9 @@ EventTarget.prototype.addEventListener = function (type, fn, options) {
 };
 document.querySelectorAll("*").forEach((el) => {
   const clone = el.cloneNode(true);
-  el.parentNode && el.parentNode.replaceChild(clone, el);
+  el.parentNode?.replaceChild(clone, el);
   blockedEvents.forEach((evt) => {
-    clone.removeAttribute("on" + evt);
+    clone.removeAttribute(`on${evt}`);
     clone[`on${evt}`] = null;
   });
 });
