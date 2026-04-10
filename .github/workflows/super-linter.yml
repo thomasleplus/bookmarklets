@@ -67,6 +67,8 @@ jobs:
         env:
           VALIDATE_ALL_CODEBASE: true
           LINTER_RULES_PATH: .
+          SAVE_SUPER_LINTER_SUMMARY: true
+          ENABLE_GITHUB_ACTIONS_STEP_SUMMARY: true
           DEFAULT_BRANCH: main
           ENFORCE_COMMITLINT_CONFIGURATION_CHECK: true
           TRIVY_SCANNERS: ${{ (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch') && 'vuln,misconfig,secret' || 'misconfig,secret'}}
