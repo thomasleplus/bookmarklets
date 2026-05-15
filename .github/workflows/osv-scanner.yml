@@ -13,8 +13,6 @@
 name: OSV-Scanner
 
 on:
-  pull_request:
-    branches: ["main"]
   push:
     branches: ["main"]
   schedule:
@@ -33,3 +31,31 @@ jobs:
       # Required to read the code
       actions: read
     uses: "google/osv-scanner-action/.github/workflows/osv-scanner-reusable.yml@9a498708959aeaef5ef730655706c5a1df1edbc2" # v2.3.8
+    with:
+      fail-on-vuln: false
+  check:
+    runs-on: ubuntu-latest
+    needs: osv-scanner
+    steps:
+      - name: Check OSV scan results
+        shell: bash
+        run: |
+          set -euo pipefail
+          IFS=$'\n\t'
+          # jq expression:
+          # - iterate packages -> vulnerabilities -> full osv entry -> severity[] (type, score)
+          # - extract numeric scores for CVSS types (cvss_v3 or numeric severity[].score)
+          # - compare to threshold
+          if echo "${RESULTS}" | jq '
+            .results[]
+            | .packages[]?
+            | .vulnerabilities[]?
+            | ( .severity[]?.score // "" ) as $s
+            | select($s != "")
+            | ($s | tonumber) >= 4.0
+            ' | grep -q -e . ; then
+            >&2 echo "error: found one or more vulnerabilities with a medium or higher severity (see step 'scan > osv-scanner > Run osv-scanner-reporter' for details)"
+            exit 1
+          fi
+        env:
+          RESULTS: ${{ needs.osv-scanner.outputs.results }}

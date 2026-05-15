@@ -1,0 +1,55 @@
+---
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+# A sample workflow which sets up periodic OSV-Scanner scanning for vulnerabilities,
+# in addition to a PR check which fails if new vulnerabilities are introduced.
+#
+# For more examples and options, including how to ignore specific vulnerabilities,
+# see https://google.github.io/osv-scanner/github-action/
+
+name: OSV-Scanner
+
+on:
+  pull_request:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  osv-scanner-pr:
+    permissions:
+      # Require writing security events to upload SARIF file to security tab
+      security-events: write
+      # Read commit contents
+      contents: read
+      # Actions read-only
+      actions: read
+    uses: "google/osv-scanner-action/.github/workflows/osv-scanner-reusable-pr.yml@90b209d0ea55cea1da9fc0c4e65782cc6acb6e2e" # v2.2.2
+    with:
+      fail-on-vuln: false
+  check:
+    runs-on: ubuntu-latest
+    needs: osv-scanner-pr
+    steps:
+      - name: Check OSV scan results
+        shell: bash
+        run: |
+          set -euo pipefail
+          IFS=$'\n\t'
+          rc=0
+          echo "${NEW_RESULTS}" | jq -r '.results[].packages[].vulnerabilities[].id' | while read -r vid; do
+            if echo "${OLD_RESULTS}" | grep -q -L -e "\"${vid}\""; then
+              rc=$((rc+1))
+              >&2 echo "error: PR introduces new vulnerabilities ${vid} (see step 'scan > osv-scanner-pr > Run osv-scanner-reporter' for details)"
+            fi
+          done
+          if [ "${rc}" -gt 0 ]; then
+            exit "${rc}"
+          fi
+        env:
+          OLD_RESULTS: ${{ needs.osv-scanner-pr.outputs.old-results }}
+          NEW_RESULTS: ${{ needs.osv-scanner-pr.outputs.new-results }}
