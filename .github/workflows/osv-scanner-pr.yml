@@ -40,9 +40,15 @@ jobs:
         run: |
           set -euo pipefail
           IFS=$'\n\t'
+          cat > "${RUNNER_TEMP}/new_results.json" <<'__OSV_NEW_RESULTS_EOF__'
+          ${{ needs.osv-scanner-pr.outputs.new-results }}
+          __OSV_NEW_RESULTS_EOF__
+          cat > "${RUNNER_TEMP}/old_results.json" <<'__OSV_OLD_RESULTS_EOF__'
+          ${{ needs.osv-scanner-pr.outputs.old-results }}
+          __OSV_OLD_RESULTS_EOF__
           rc=0
-          echo "${NEW_RESULTS}" | jq -r '.results[].packages[].vulnerabilities[].id' | while read -r vid; do
-            if echo "${OLD_RESULTS}" | grep -q -L -e "\"${vid}\""; then
+          jq -r '.results[].packages[].vulnerabilities[].id' "${RUNNER_TEMP}/new_results.json" | while read -r vid; do
+            if grep -q -L -e "\"${vid}\"" "${RUNNER_TEMP}/old_results.json"; then
               rc=$((rc+1))
               >&2 echo "error: PR introduces new vulnerabilities ${vid} (see step 'scan > osv-scanner-pr > Run osv-scanner-reporter' for details)"
             fi
@@ -50,6 +56,3 @@ jobs:
           if [ "${rc}" -gt 0 ]; then
             exit "${rc}"
           fi
-        env:
-          OLD_RESULTS: ${{ needs.osv-scanner-pr.outputs.old-results }}
-          NEW_RESULTS: ${{ needs.osv-scanner-pr.outputs.new-results }}

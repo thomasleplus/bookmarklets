@@ -42,20 +42,21 @@ jobs:
         run: |
           set -euo pipefail
           IFS=$'\n\t'
+          cat > "${RUNNER_TEMP}/results.json" <<'__OSV_RESULTS_EOF__'
+          ${{ needs.osv-scanner.outputs.results }}
+          __OSV_RESULTS_EOF__
           # jq expression:
           # - iterate packages -> vulnerabilities -> full osv entry -> severity[] (type, score)
           # - extract numeric scores for CVSS types (cvss_v3 or numeric severity[].score)
           # - compare to threshold
-          if echo "${RESULTS}" | jq '
+          if jq '
             .results[]
             | .packages[]?
             | .vulnerabilities[]?
             | ( .severity[]?.score // "" ) as $s
             | select($s != "")
             | ($s | tonumber) >= 4.0
-            ' | grep -q -e . ; then
+            ' "${RUNNER_TEMP}/results.json" | grep -q -e . ; then
             >&2 echo "error: found one or more vulnerabilities with a medium or higher severity (see step 'scan > osv-scanner > Run osv-scanner-reporter' for details)"
             exit 1
           fi
-        env:
-          RESULTS: ${{ needs.osv-scanner.outputs.results }}
