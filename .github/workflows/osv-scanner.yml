@@ -39,18 +39,18 @@ jobs:
     steps:
       - name: Check OSV scan results
         shell: bash
+        env:
+          # Passed through the environment rather than interpolated into the
+          # script body. The runner injects this out-of-band, so the scanner
+          # JSON can never break out of the surrounding shell context no matter
+          # what it contains or how large it is.
+          RESULTS: ${{ needs.osv-scanner.outputs.results }}
         run: |
           set -euo pipefail
           IFS=$'\n\t'
-          # The scan results JSON can be very large (potentially exceeding the
-          # command-line / ARG_MAX length limit if passed as an argument or as
-          # an env var expanded on the command line), so the workflow-level
-          # expansion is written straight to a file via a quoted heredoc.
-          # The quoted delimiter prevents any runtime shell expansion of
-          # the JSON contents.
-          cat > "${RUNNER_TEMP}/results.json" <<'__OSV_RESULTS_EOF__'
-          ${{ needs.osv-scanner.outputs.results }}
-          __OSV_RESULTS_EOF__
+          # printf is a bash builtin, so the (potentially very large) value is
+          # written to disk without hitting the ARG_MAX command-line limit.
+          printf '%s' "${RESULTS}" > "${RUNNER_TEMP}/results.json"
           # jq expression:
           # - iterate packages -> vulnerabilities -> full osv entry -> severity[] (type, score)
           # - extract numeric scores for CVSS types (cvss_v3 or numeric severity[].score)
