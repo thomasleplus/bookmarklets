@@ -40,19 +40,29 @@ jobs:
         run: |
           set -euo pipefail
           IFS=$'\n\t'
+          # The scan results JSON can be very large (potentially exceeding the
+          # command-line / ARG_MAX length limit if passed as an argument or as
+          # an env var expanded on the command line), so the workflow-level
+          # expansion is written straight to a file via a quoted heredoc.
+          # The quoted delimiter prevents any runtime shell expansion of
+          # the JSON contents.
           cat > "${RUNNER_TEMP}/new_results.json" <<'__OSV_NEW_RESULTS_EOF__'
           ${{ needs.osv-scanner-pr.outputs.new-results }}
           __OSV_NEW_RESULTS_EOF__
           cat > "${RUNNER_TEMP}/old_results.json" <<'__OSV_OLD_RESULTS_EOF__'
           ${{ needs.osv-scanner-pr.outputs.old-results }}
           __OSV_OLD_RESULTS_EOF__
+          # Fail if any vulnerability present in the new results is absent from
+          # the old results, i.e. the PR introduces it. Read via process
+          # substitution rather than a pipe so the rc assignment is not lost in
+          # a subshell, and use a fixed-string match for the exact vuln id.
           rc=0
-          jq -r '.results[].packages[].vulnerabilities[].id' "${RUNNER_TEMP}/new_results.json" | while read -r vid; do
-            if grep -q -L -e "\"${vid}\"" "${RUNNER_TEMP}/old_results.json"; then
-              rc=$((rc+1))
-              >&2 echo "error: PR introduces new vulnerabilities ${vid} (see step 'scan > osv-scanner-pr > Run osv-scanner-reporter' for details)"
+          while read -r vid; do
+            if ! grep -qF -e "\"${vid}\"" "${RUNNER_TEMP}/old_results.json"; then
+              rc=1
+              >&2 echo "error: PR introduces new vulnerability ${vid} (see step 'scan > osv-scanner-pr > Run osv-scanner-reporter' for details)"
             fi
-          done
-          if [ "${rc}" -gt 0 ]; then
-            exit "${rc}"
+          done < <(jq -r '.results[]?.packages[]?.vulnerabilities[]?.id' "${RUNNER_TEMP}/new_results.json")
+          if [ "${rc}" -ne 0 ]; then
+            exit 1
           fi

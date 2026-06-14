@@ -10,7 +10,7 @@
 # For more examples and options, including how to ignore specific vulnerabilities,
 # see https://google.github.io/osv-scanner/github-action/
 
-name: OSV Scanner
+name: "OSV Scanner"
 
 on:
   push:
@@ -42,6 +42,12 @@ jobs:
         run: |
           set -euo pipefail
           IFS=$'\n\t'
+          # The scan results JSON can be very large (potentially exceeding the
+          # command-line / ARG_MAX length limit if passed as an argument or as
+          # an env var expanded on the command line), so the workflow-level
+          # expansion is written straight to a file via a quoted heredoc.
+          # The quoted delimiter prevents any runtime shell expansion of
+          # the JSON contents.
           cat > "${RUNNER_TEMP}/results.json" <<'__OSV_RESULTS_EOF__'
           ${{ needs.osv-scanner.outputs.results }}
           __OSV_RESULTS_EOF__
