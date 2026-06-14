@@ -9,6 +9,8 @@ jobs:
     permissions:
       # Required to read the code
       contents: read
+      # Required to write summary to pull-request
+      pull-requests: write
     runs-on: ubuntu-latest
     steps:
       - name: "Checkout Repository"
@@ -20,9 +22,12 @@ jobs:
         uses: actions/dependency-review-action@a1d282b36b6f3519aa1f3fc636f609c47dddb294 # v5.0.0
         with:
           fail-on-severity: moderate
-          deny-licenses: >-
-            GPL-2.0-only, GPL-2.0-or-later,
-            GPL-3.0-only, GPL-3.0-or-later,
-            AGPL-3.0-only, AGPL-3.0-or-later,
-            SSPL-1.0, BUSL-1.1
+          allow-licenses: >-
+            0BSD,
+            Apache-2.0,
+            BSD-2-Clause,
+            BSD-3-Clause,
+            CC0-1.0,
+            MIT,
+            MIT-0
           comment-summary-in-pr: always
