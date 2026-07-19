@@ -11,6 +11,7 @@ rules:
         - google-github-actions/*
         - google/*
         - googleapis/*
+        - leplusorg/*
         - microsoft/*
         - ossf/*
         - sigstore/*
