@@ -80,4 +80,4 @@ jobs:
           # Only lint commit messages when the run was triggered by a commit
           # (push / pull_request); schedule and workflow_dispatch runs have no
           # triggering commit for commitlint to check.
-          VALIDATE_GIT_COMMITLINT: ${{ (github.event_name == 'push' || github.event_name == 'pull_request') && 'true' || 'false' }}
+          VALIDATE_GIT_COMMITLINT: ${{ (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch') && 'false' || '' }}
