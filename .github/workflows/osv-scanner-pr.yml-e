@@ -1,0 +1,67 @@
+---
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+# A sample workflow which sets up periodic OSV-Scanner scanning for vulnerabilities,
+# in addition to a PR check which fails if new vulnerabilities are introduced.
+#
+# For more examples and options, including how to ignore specific vulnerabilities,
+# see https://google.github.io/osv-scanner/github-action/
+
+name: "OSV Scanner - PR"
+
+on:
+  pull_request:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  osv-scanner-pr:
+    permissions:
+      # Require writing security events to upload SARIF file to security tab
+      security-events: write
+      # Read commit contents
+      contents: read
+      # Actions read-only
+      actions: read
+    uses: "google/osv-scanner-action/.github/workflows/osv-scanner-reusable-pr.yml@8deb546fdb875b9996d27d4950be7312dac076a1" # v2.5.0
+    with:
+      fail-on-vuln: false
+  check:
+    runs-on: ubuntu-latest
+    needs: osv-scanner-pr
+    steps:
+      - name: Check OSV scan results
+        shell: bash
+        env:
+          # Passed through the environment rather than interpolated into the
+          # script body. The runner injects these out-of-band, so the scanner
+          # JSON can never break out of the surrounding shell context no matter
+          # what it contains or how large it is.
+          NEW_RESULTS: ${{ needs.osv-scanner-pr.outputs.new-results }}
+          OLD_RESULTS: ${{ needs.osv-scanner-pr.outputs.old-results }}
+        run: |
+          set -euo pipefail
+          IFS=$'\n\t'
+          # printf is a bash builtin, so the (potentially very large) values are
+          # written to disk without hitting the ARG_MAX command-line limit.
+          printf '%s' "${NEW_RESULTS}" > "${RUNNER_TEMP}/new_results.json"
+          printf '%s' "${OLD_RESULTS}" > "${RUNNER_TEMP}/old_results.json"
+          # Fail if any vulnerability present in the new results is absent from
+          # the old results, i.e. the PR introduces it. Read via process
+          # substitution rather than a pipe so the rc assignment is not lost in
+          # a subshell, and use a fixed-string match for the exact vuln id.
+          rc=0
+          while read -r vid; do
+            if ! grep -qF -e "\"${vid}\"" "${RUNNER_TEMP}/old_results.json"; then
+              rc=1
+              >&2 echo "error: PR introduces new vulnerability ${vid} (see step 'scan > osv-scanner-pr > Run osv-scanner-reporter' for details)"
+            fi
+          done < <(jq -r '.results[]?.packages[]?.vulnerabilities[]?.id' "${RUNNER_TEMP}/new_results.json")
+          if [ "${rc}" -ne 0 ]; then
+            exit 1
+          fi
