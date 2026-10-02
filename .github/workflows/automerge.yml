@@ -24,8 +24,12 @@ jobs:
           # Checking the PR title is a poor substitute for the actual PR changes
           # but as long as this is used only with dependabot PRs,
           # it should be safe to assume that the title is not misleading.
-          regexp='[Bb]ump .* from [0-9]+\.[0-9]+(\.[0-9]+)?(\.[0-9]+)?(\-[a-z]+)? to [0-9]+\.[0-9]+(\.[0-9]+)?(\.[0-9]+)?(\-[a-z]+)?( in .*)?$'
-          if ! [[ "${PR_TITLE}" =~ ${regexp} ]] ; then
+          regexp_group='[Bb]ump the .* group with [0-9]+ updates$'
+          regexp_semver='[Bb]ump .* from [0-9]+\.[0-9]+(\.[0-9]+)?(\.[0-9]+)?(\-[a-z]+)? to [0-9]+\.[0-9]+(\.[0-9]+)?(\.[0-9]+)?(\-[a-z]+)?( in .*)?$'
+          if [[ "${PR_TITLE}" =~ ${regexp_group} ]] ; then
+            echo 'Automated group approval.'
+            gh pr review --approve "${PR_URL}"
+          elif ! [[ "${PR_TITLE}" =~ ${regexp_semver} ]] ; then
             echo 'Non-semver upgrade, needs manual review.'
           elif [ "${BASH_REMATCH[3]}" != "${BASH_REMATCH[6]}" ] ; then
             echo 'Version suffixes do not match, needs manual review.'
