@@ -52,17 +52,24 @@ jobs:
           set -euo pipefail
           IFS=$'\n\t'
           # Each rule in the SARIF report is a vulnerability found by the scan,
-          # with its worst numeric CVSS score in the security-severity property.
-          # A jq failure (e.g. missing or malformed report) aborts the step via
-          # set -e instead of being mistaken for "no vulnerabilities".
-          count="$(jq '
-            [ .runs[].tool.driver.rules[]?
-              | .properties["security-severity"] // empty
-              | tonumber
-              | select(. >= 4.0) ]
-            | length
+          # with its worst numeric CVSS score in the security-severity property,
+          # and each result referencing that rule is an affected package. List
+          # the medium or higher severity ones, most severe first. A jq failure
+          # (e.g. missing or malformed report) aborts the step via set -e
+          # instead of being mistaken for "no vulnerabilities".
+          vulns="$(jq -r '
+            .runs[] as $run
+            | [ $run.tool.driver.rules[]?
+                | (.properties["security-severity"] // empty | tonumber) as $severity
+                | select($severity >= 4.0)
+                | {id, $severity, summary: (.shortDescription.text // .id)} ]
+            | sort_by(-.severity)[]
+            | . as $vuln
+            | "\($vuln.summary) (severity \($vuln.severity))",
+              ($run.results[]? | select(.ruleId == $vuln.id) | "  \(.message.text)")
             ' "${RUNNER_TEMP}/osv/results.sarif")"
-          if [ "${count}" -gt 0 ]; then
-            >&2 echo "error: found one or more vulnerabilities with a medium or higher severity (see step 'scan > osv-scanner > Run osv-scanner-reporter' for details)"
+          if [ -n "${vulns}" ]; then
+            >&2 echo "error: found one or more vulnerabilities with a medium or higher severity:"
+            >&2 printf '%s\n' "${vulns}"
             exit 1
           fi

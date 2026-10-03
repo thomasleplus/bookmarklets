@@ -51,16 +51,36 @@ jobs:
           set -euo pipefail
           IFS=$'\n\t'
           # Fail if any vulnerability present in the new results is absent from
-          # the old results, i.e. the PR introduces it. Read via process
-          # substitution rather than a pipe so the rc assignment is not lost in
-          # a subshell, and use a fixed-string match for the exact vuln id.
-          rc=0
-          while read -r vid; do
-            if ! grep -qF -e "\"${vid}\"" "${RUNNER_TEMP}/osv/old-results.json"; then
-              rc=1
-              >&2 echo "error: PR introduces new vulnerability ${vid} (see step 'scan > osv-scanner-pr > Run osv-scanner-reporter' for details)"
-            fi
-          done < <(jq -r '.results[]?.packages[]?.vulnerabilities[]?.id' "${RUNNER_TEMP}/osv/new-results.json")
-          if [ "${rc}" -ne 0 ]; then
+          # the old results (by id or alias), i.e. the PR introduces it, and
+          # list each one with its severity and affected packages. A jq failure
+          # (e.g. missing or malformed results) aborts the step via set -e
+          # instead of being mistaken for "no new vulnerabilities".
+          vulns="$(jq -r --slurpfile old "${RUNNER_TEMP}/osv/old-results.json" '
+            ([ $old[0].results[]?.packages[]?.vulnerabilities[]?
+               | .id, .aliases[]? ]
+             | map({(.): true}) | add // {}) as $known
+            | [ .results[]?
+                | .source.path as $path
+                | .packages[]?
+                | .package as $package
+                | .groups as $groups
+                | .vulnerabilities[]?
+                | select($known[.id] | not)
+                | .id as $id
+                | { id,
+                    summary: (.summary // ""),
+                    severity: ([ $groups[]?
+                                 | select(any(.ids[]?; . == $id))
+                                 | .max_severity // empty
+                                 | select(. != "") ]
+                               | first // "unknown"),
+                    package: "\($package.ecosystem)/\($package.name)@\($package.version) in \($path)" } ]
+            | group_by(.id)[]
+            | (.[0] | "\(.id)\(if .summary != "" then ": \(.summary)" else "" end) (severity \(.severity))"),
+              (.[] | "  \(.package)")
+            ' "${RUNNER_TEMP}/osv/new-results.json")"
+          if [ -n "${vulns}" ]; then
+            >&2 echo "error: PR introduces one or more new vulnerabilities:"
+            >&2 printf '%s\n' "${vulns}"
             exit 1
           fi
