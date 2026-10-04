@@ -51,25 +51,65 @@ jobs:
         run: |
           set -euo pipefail
           IFS=$'\n\t'
+          sarif="${RUNNER_TEMP}/osv/results.sarif"
           # Each rule in the SARIF report is a vulnerability found by the scan,
-          # with its worst numeric CVSS score in the security-severity property,
-          # and each result referencing that rule is an affected package. List
-          # the medium or higher severity ones, most severe first. A jq failure
-          # (e.g. missing or malformed report) aborts the step via set -e
-          # instead of being mistaken for "no vulnerabilities".
-          vulns="$(jq -r '
-            .runs[] as $run
-            | [ $run.tool.driver.rules[]?
-                | (.properties["security-severity"] // empty | tonumber) as $severity
-                | select($severity >= 4.0)
-                | {id, $severity, summary: (.shortDescription.text // .id)} ]
-            | sort_by(-.severity)[]
-            | . as $vuln
-            | "\($vuln.summary) (severity \($vuln.severity))",
-              ($run.results[]? | select(.ruleId == $vuln.id) | "  \(.message.text)")
-            ' "${RUNNER_TEMP}/osv/results.sarif")"
-          if [ -n "${vulns}" ]; then
-            >&2 echo "error: found one or more vulnerabilities with a medium or higher severity:"
-            >&2 printf '%s\n' "${vulns}"
-            exit 1
+          # with its worst numeric CVSS score in the security-severity property.
+          # Count the medium or higher severity ones. A jq failure (e.g. missing
+          # or malformed report) aborts the step via set -e instead of being
+          # mistaken for "no vulnerabilities".
+          count="$(jq '
+            [ .runs[].tool.driver.rules[]?
+              | .properties["security-severity"] // empty
+              | tonumber
+              | select(. >= 4.0) ]
+            | length
+            ' "${sarif}")"
+          if [ "${count}" -eq 0 ]; then
+            exit 0
           fi
+          # Print the vulnerabilities in the SARIF report as a table like the
+          # one from osv-scanner's reporter, with the columns the report gives
+          # directly: each result is an affected package, with its name,
+          # version, and source, and each rule gives the vulnerability's ids
+          # and worst CVSS score.
+          jq -r '
+            def pad($w): . + ((" " * ($w - length)) // "");
+            def rating:
+              if . == null or . == 0 then "Unknown"
+              elif . >= 9 then "Critical"
+              elif . >= 7 then "High"
+              elif . >= 4 then "Medium"
+              else "Low" end;
+            def form($n; $one; $many): if $n == 1 then $one else $many end;
+            [ .runs[]
+              | (.tool.driver.rules // [] | map({key: .id, value: .}) | from_entries) as $rules
+              | .results[]?
+              | $rules[.ruleId] as $rule
+              | (.message.text | capture("^Package \u0027(?<name>.+)@(?<version>[^@\u0027]*)\u0027")) as $pkg
+              | { ids: ($rule.deprecatedIds // [] | if length == 0 then [$rule.id] else . end),
+                  cvss: ($rule.properties["security-severity"] // ""),
+                  name: $pkg.name,
+                  version: $pkg.version,
+                  source: .locations[0].physicalLocation.artifactLocation.uri } ]
+            | sort_by(.source, .name, .version, .ids[0])
+            | . as $rows
+            | ([ $rows[] | [.source, .name, .version] ] | unique | length) as $packages
+            | ([ $rows[] | .cvss | if . == "" then null else tonumber end | rating ]
+               | group_by(.) | map({key: .[0], value: length}) | from_entries) as $ratings
+            | [ ["OSV URL", "CVSS", "PACKAGE", "VERSION", "SOURCE"] ]
+              + [ $rows[] | [ (.ids | map("https://osv.dev/" + .) | join("\n")),
+                              .cvss, .name, .version, .source ] ]
+            | . as $table
+            | [ range(5) as $c | [ $table[][$c] | split("\n")[] | length ] | max ] as $widths
+            | ("+" + ([ $widths[] | "-" * (. + 2) ] | join("+")) + "+") as $border
+            | def line($cells): "| " + ([ range(5) as $c | $cells[$c] | pad($widths[$c]) ] | join(" | ")) + " |";
+              def row($cells):
+                ([ $cells[] | split("\n") | length ] | max) as $height
+                | range($height) as $i | line([ $cells[] | split("\n")[$i] // "" ]);
+              "",
+              "Total \($packages) \(form($packages; "package"; "packages")) affected by \($rows | length) known \(form($rows | length; "vulnerability"; "vulnerabilities")) (\($ratings.Critical // 0) Critical, \($ratings.High // 0) High, \($ratings.Medium // 0) Medium, \($ratings.Low // 0) Low, \($ratings.Unknown // 0) Unknown).",
+              "",
+              $border, row($table[0]), $border, ($table[1:][] | row(.)), $border
+            ' "${sarif}"
+          echo "::error::Found one or more vulnerabilities with a medium or higher severity (CVSS 4.0 or more); see the table above. For more details, such as ecosystems and fixed versions, see the 'Run osv-scanner-reporter' step of the 'osv-scanner / osv-scan' job in this run."
+          exit 1

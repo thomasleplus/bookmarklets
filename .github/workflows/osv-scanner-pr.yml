@@ -50,37 +50,60 @@ jobs:
         run: |
           set -euo pipefail
           IFS=$'\n\t'
-          # Fail if any vulnerability present in the new results is absent from
-          # the old results (by id or alias), i.e. the PR introduces it, and
-          # list each one with its severity and affected packages. A jq failure
-          # (e.g. missing or malformed results) aborts the step via set -e
-          # instead of being mistaken for "no new vulnerabilities".
-          vulns="$(jq -r --slurpfile old "${RUNNER_TEMP}/osv/old-results.json" '
+          # Print the vulnerabilities present in the new results but absent
+          # from the old results (by id or alias), i.e. introduced by the PR, as
+          # a table like the one from osv-scanner's reporter, with the columns
+          # the results give directly; print nothing if there are none. A jq
+          # failure (e.g. missing or malformed results) aborts the step via
+          # set -e instead of being mistaken for "no new vulnerabilities".
+          table="$(jq -r --slurpfile old "${RUNNER_TEMP}/osv/old-results.json" '
+            def pad($w): . + ((" " * ($w - length)) // "");
+            def rating:
+              if . == null or . == 0 then "Unknown"
+              elif . >= 9 then "Critical"
+              elif . >= 7 then "High"
+              elif . >= 4 then "Medium"
+              else "Low" end;
+            def form($n; $one; $many): if $n == 1 then $one else $many end;
             ([ $old[0].results[]?.packages[]?.vulnerabilities[]?
                | .id, .aliases[]? ]
              | map({(.): true}) | add // {}) as $known
             | [ .results[]?
-                | .source.path as $path
+                | (.source.path | ltrimstr("/github/workspace/")) as $source
                 | .packages[]?
                 | .package as $package
-                | .groups as $groups
-                | .vulnerabilities[]?
-                | select($known[.id] | not)
-                | .id as $id
-                | { id,
-                    summary: (.summary // ""),
-                    severity: ([ $groups[]?
-                                 | select(any(.ids[]?; . == $id))
-                                 | .max_severity // empty
-                                 | select(. != "") ]
-                               | first // "unknown"),
-                    package: "\($package.ecosystem)/\($package.name)@\($package.version) in \($path)" } ]
-            | group_by(.id)[]
-            | (.[0] | "\(.id)\(if .summary != "" then ": \(.summary)" else "" end) (severity \(.severity))"),
-              (.[] | "  \(.package)")
+                | .groups[]?
+                | select(any(.ids[]; $known[.] | not))
+                | { ids,
+                    cvss: (.max_severity // ""),
+                    ecosystem: $package.ecosystem,
+                    name: $package.name,
+                    version: $package.version,
+                    $source } ]
+            | select(length > 0)
+            | sort_by(.ecosystem, .source, .name, .version, .ids[0])
+            | . as $rows
+            | ([ $rows[] | [.source, .name, .version] ] | unique | length) as $packages
+            | ([ $rows[] | .ecosystem ] | unique | length) as $ecosystems
+            | ([ $rows[] | .cvss | if . == "" then null else tonumber end | rating ]
+               | group_by(.) | map({key: .[0], value: length}) | from_entries) as $ratings
+            | [ ["OSV URL", "CVSS", "ECOSYSTEM", "PACKAGE", "VERSION", "SOURCE"] ]
+              + [ $rows[] | [ (.ids | map("https://osv.dev/" + .) | join("\n")),
+                              .cvss, .ecosystem, .name, .version, .source ] ]
+            | . as $table
+            | [ range(6) as $c | [ $table[][$c] | split("\n")[] | length ] | max ] as $widths
+            | ("+" + ([ $widths[] | "-" * (. + 2) ] | join("+")) + "+") as $border
+            | def line($cells): "| " + ([ range(6) as $c | $cells[$c] | pad($widths[$c]) ] | join(" | ")) + " |";
+              def row($cells):
+                ([ $cells[] | split("\n") | length ] | max) as $height
+                | range($height) as $i | line([ $cells[] | split("\n")[$i] // "" ]);
+              "Total \($packages) \(form($packages; "package"; "packages")) affected by \($rows | length) new \(form($rows | length; "vulnerability"; "vulnerabilities")) (\($ratings.Critical // 0) Critical, \($ratings.High // 0) High, \($ratings.Medium // 0) Medium, \($ratings.Low // 0) Low, \($ratings.Unknown // 0) Unknown) from \($ecosystems) \(form($ecosystems; "ecosystem"; "ecosystems")).",
+              "",
+              $border, row($table[0]), $border, ($table[1:][] | row(.)), $border
             ' "${RUNNER_TEMP}/osv/new-results.json")"
-          if [ -n "${vulns}" ]; then
-            >&2 echo "error: PR introduces one or more new vulnerabilities:"
-            >&2 printf '%s\n' "${vulns}"
-            exit 1
+          if [ -z "${table}" ]; then
+            exit 0
           fi
+          printf '\n%s\n' "${table}"
+          echo "::error::PR introduces one or more new vulnerabilities; see the table above. For more details, such as fixed versions, see the 'Run osv-scanner-reporter' step of the 'osv-scanner-pr / osv-scan' job in this run."
+          exit 1
