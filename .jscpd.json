@@ -1,3 +1,7 @@
 {
-  "ignore": ["javascripts/**"]
+  "ignore": [
+    "javascripts/**",
+    ".github/workflows/osv-scanner-pr.yml",
+    ".github/workflows/osv-scanner.yml"
+  ]
 }
