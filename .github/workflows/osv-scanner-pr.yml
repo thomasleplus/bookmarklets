@@ -54,9 +54,23 @@ jobs:
           # from the old results (by id or alias), i.e. introduced by the PR, as
           # a table like the one from osv-scanner's reporter, with the columns
           # the results give directly; print nothing if there are none. A jq
-          # failure (e.g. missing or malformed results) aborts the step via
-          # set -e instead of being mistaken for "no new vulnerabilities".
-          table="$(jq -r --slurpfile old "${RUNNER_TEMP}/osv/old-results.json" '
+          # failure (e.g. malformed results) aborts the step via set -e
+          # instead of being mistaken for "no new vulnerabilities".
+          old="${RUNNER_TEMP}/osv/old-results.json"
+          new="${RUNNER_TEMP}/osv/new-results.json"
+          # The scanner exits successfully without writing results when it
+          # finds no lockfiles (a failed scan without results already fails
+          # the reusable workflow), so a missing file means nothing was
+          # scanned: no new results means nothing to check, and no old
+          # results means every new vulnerability is introduced by the PR.
+          if [ ! -e "${new}" ]; then
+            echo "::notice::No OSV scan results for this PR (no lockfiles found), nothing to check."
+            exit 0
+          fi
+          if [ ! -e "${old}" ]; then
+            old=/dev/null
+          fi
+          table="$(jq -r --slurpfile old "${old}" '
             def pad($w): . + ((" " * ($w - length)) // "");
             def rating:
               if . == null or . == 0 then "Unknown"
@@ -100,7 +114,7 @@ jobs:
               "Total \($packages) \(form($packages; "package"; "packages")) affected by \($rows | length) new \(form($rows | length; "vulnerability"; "vulnerabilities")) (\($ratings.Critical // 0) Critical, \($ratings.High // 0) High, \($ratings.Medium // 0) Medium, \($ratings.Low // 0) Low, \($ratings.Unknown // 0) Unknown) from \($ecosystems) \(form($ecosystems; "ecosystem"; "ecosystems")).",
               "",
               $border, row($table[0]), $border, ($table[1:][] | row(.)), $border
-            ' "${RUNNER_TEMP}/osv/new-results.json")"
+            ' "${new}")"
           if [ -z "${table}" ]; then
             exit 0
           fi
